@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Allerta:700|Allerta Stencil:400');
+
+
+html {
+    font-size: 100%;
+}
+
+
+body {
+    background-color: #be6b41;
+    color: #fadbbd;
+    --primary: #ffb561;
+    --secondary: #162731;
+    --accent: #0573e1;
+    font-family: 'Allerta Stencil';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Allerta';
+
+}
