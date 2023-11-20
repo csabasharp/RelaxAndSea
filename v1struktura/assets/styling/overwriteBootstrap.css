@@ -1,0 +1,26 @@
+.navbar .navbar-brand,
+.nav-link  {
+  color: #fadbbd !important;
+}
+
+.navbar .nav-link.active {
+  font-size: inherit;
+}
+
+.dropdown-menu .dropdown-item {
+  background-color: #348adf;
+  color: #fadbbd !important;
+}
+
+.dropdown-menu {
+  opacity: 0.9;
+  padding: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.navbar a:hover, .navbar a:active {
+  color: var(--primary) !important;
+}
