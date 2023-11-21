@@ -1,26 +1,39 @@
+.navbar {
+  padding: 0.01rem 1rem;
+font-weight: bold;
+}
+
 .navbar .navbar-brand,
-.nav-link  {
+.nav-link {
   color: #fadbbd !important;
 }
 
-.navbar .nav-link.active {
+.navbar .nav-item .nav-link.active {
   font-size: inherit;
 }
 
-.dropdown-menu .dropdown-item {
-  background-color: #348adf;
-  color: #fadbbd !important;
+.navbar-collapse {
+  display: flex;
+  justify-content: center;
 }
 
+
 .dropdown-menu {
-  opacity: 0.9;
+opacity: 0.95;
   padding: 0;
+}
+
+.dropdown-menu .dropdown-item {
+  background-color: #1D69B5;
+  color: #fadbbd !important;
 }
 
 .dropdown:hover .dropdown-menu {
   display: block;
 }
 
-.navbar a:hover, .navbar a:active {
+.navbar a:hover,
+.active  {
   color: var(--primary) !important;
 }
+

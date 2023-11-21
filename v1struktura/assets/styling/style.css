@@ -7,7 +7,7 @@
 
 @font-face {
   font-family: "Uni Sans Heavy";
-  src: url("unifont/Uni Sans Heavy.otf") format("truetype");
+  src: url("unifont/Uni\ Sans\ Heavy.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -42,7 +42,59 @@ header {
 }
 
 .relaxlogoszoveg img {
-  width: 65px;
+  width: 6.078125vw;
   display: block;
   margin: auto;
+}
+
+footer {
+  padding-top: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.logo-container {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-container::after {
+  content: "";
+  position: absolute;
+  bottom: -1.5vw;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6vw;
+  height: 3vw;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.text-gradient {
+  background: rgb(190, 107, 65);
+  background: linear-gradient(
+    90deg,
+    rgba(190, 107, 65, 1) 0%,
+    rgba(238, 186, 108, 1) 35%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient:hover {
+  background: rgb(255, 181, 97);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 181, 97, 1) 0%,
+    rgba(201, 135, 36, 1) 35%
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
