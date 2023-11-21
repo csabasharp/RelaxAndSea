@@ -23,10 +23,13 @@
     <header id="roof">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
+          <div class="logo-container">
           <a class="navbar-brand relaxlogoszoveg" href="index.html">
-            <img src="assets/images/svgLogoKekhatter.svg" alt="Menulogo" />
             <h4>Relax & Sea</h4>
+            <img src="assets/images/svgLogoKekhatter.svg" alt="Menulogo" />
+           
           </a>
+          </div>
           <button
             class="navbar-toggler"
             type="button"
@@ -39,7 +42,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav mx-auto">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="index.html"
                   >Kezdőlap</a
@@ -54,18 +57,25 @@
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Foglalás
+                  Szobáink és Foglalás
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a class="dropdown-item" href="foglalas/foglalas.html">
+                      Foglalás
+                    </a>
+                  </li>
                   <li>
                     <a
                       class="dropdown-item"
                       href="foglalas/szobaink/szobaink.html"
-                      >Szobáink</a
                     >
+                      Szobáink
+                    </a>
                   </li>
                 </ul>
               </li>
+
               <li class="nav-item">
                 <a class="nav-link" href="etterem/etterem.html">Étterem</a>
               </li>
@@ -76,10 +86,16 @@
                 <a class="nav-link" href="wellness/wellness.html">Wellness</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="belepes/login.html">Bejelentkezés</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="contact.html">Kapcsolat</a>
+              </li>
+            </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <div class="login-link">
+                  <a class="nav-link text-gradient" href="belepes/login.html"
+                    >Bejelentkezés</a
+                  >
+                </div>
               </li>
             </ul>
           </div>
@@ -92,5 +108,9 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+
+    <footer class="card-footer">
+     Copyright © 2023-2024 - Hotel Relax & Sea - All Rights Reserved.
+    </footer>
   </body>
 </html>
