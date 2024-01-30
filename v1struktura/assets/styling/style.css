@@ -42,7 +42,7 @@ header {
 }
 
 .relaxlogoszoveg img {
-  width: 6.078125vw;
+  width: 8.078125vw;
   display: block;
   margin: auto;
 }
@@ -57,43 +57,63 @@ footer {
 }
 
 .logo-container {
+  margin-top: 100px;
   position: relative;
   display: inline-block;
+}
+
+.logo-container::before {
+  content: "Relax & Sea";
+  position: absolute;
+  font-family: "Uni Sans Heavy";
+  text-align: center;
+  font-size: large;
+  color: #fadbbd;
+  top: -20%;
+  left: -1vw;
+  width: 150px;
+}
+
+.logo-container:hover::before {
+  color: #ffb561;
 }
 
 .logo-container::after {
   content: "";
   position: absolute;
-  bottom: -1.5vw;
+  bottom: 18%;
   left: 50%;
   transform: translateX(-50%);
-  width: 6vw;
-  height: 3vw;
+  width: 8.8859375vw;
+  height: 8.8859375vw;
   border-radius: 50%;
   background: var(--accent);
+  z-index: -1;
+}
+
+#login {
+  font-family: "Uni Sans Heavy";
 }
 
 .text-gradient {
   background: rgb(190, 107, 65);
   background: linear-gradient(
-    90deg,
-    rgba(190, 107, 65, 1) 0%,
-    rgba(238, 186, 108, 1) 35%
+    0deg,
+    rgb(234, 91, 19) 10%,
+    rgba(238, 186, 108, 1) 70%
   );
   -webkit-background-clip: text;
   background-clip: text;
-
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient:hover {
   background: rgb(255, 181, 97);
   background: linear-gradient(
-    90deg,
-    rgba(255, 181, 97, 1) 0%,
-    rgba(201, 135, 36, 1) 35%
+    0deg,
+    rgba(255, 181, 97, 1) 10%,
+    rgba(234, 91, 19, 1) 70%
   );
-
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -1,6 +1,7 @@
 .navbar {
   padding: 0.01rem 1rem;
-font-weight: bold;
+  font-weight: bold;
+  max-height:100px;
 }
 
 .navbar .navbar-brand,
@@ -14,17 +15,15 @@ font-weight: bold;
 
 .navbar-collapse {
   display: flex;
-  justify-content: center;
 }
 
-
 .dropdown-menu {
-opacity: 0.95;
+  opacity: 0.95;
   padding: 0;
 }
 
 .dropdown-menu .dropdown-item {
-  background-color: #1D69B5;
+  background-color: #1d69b5;
   color: #fadbbd !important;
 }
 
@@ -33,7 +32,6 @@ opacity: 0.95;
 }
 
 .navbar a:hover,
-.active  {
+.active {
   color: var(--primary) !important;
 }
-
