@@ -18,10 +18,11 @@ html {
 
 body {
   background-color: #be6b41;
-  color: #fadbbd;
+  --normaltext: #fadbbd;
   --primary: #ffb561;
   --secondary: #162731;
   --accent: #0573e1;
+  color: var(--normaltext);
   font-family: "Uni Sans Thin";
 }
 
@@ -68,14 +69,14 @@ footer {
   font-family: "Uni Sans Heavy";
   text-align: center;
   font-size: large;
-  color: #fadbbd;
+  color: var(--normaltext);
   top: -20%;
   left: -1vw;
   width: 150px;
 }
 
 .logo-container:hover::before {
-  color: #ffb561;
+  color: var(--primary);
 }
 
 .logo-container::after {
@@ -117,4 +118,55 @@ footer {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+form {
+  visibility: hidden;
+}
+
+#regbutton,
+#loginbutton {
+  border: 1.5px solid #008cba;
+  color: #008cba;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#regbutton:hover,
+#loginbutton:hover {
+  background-color: #008cba;
+  color: white;
+}
+
+.foglalasgomb {
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 70px;
+  transition: all 0.2s;
+  background-color: #0063c6;
+}
+
+.foglalasgomb:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.foglalasgomb:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.foglalasgomb::after {
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  transition: all 0.4s;
+}
+
+.foglalasgomb:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
 }

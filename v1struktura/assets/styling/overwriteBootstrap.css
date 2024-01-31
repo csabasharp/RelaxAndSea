@@ -1,12 +1,12 @@
 .navbar {
   padding: 0.01rem 1rem;
   font-weight: bold;
-  max-height:100px;
+  max-height: 100px;
 }
 
 .navbar .navbar-brand,
 .nav-link {
-  color: #fadbbd !important;
+  color: var(--normaltext) !important;
 }
 
 .navbar .nav-item .nav-link.active {
@@ -17,21 +17,30 @@
   display: flex;
 }
 
-.dropdown-menu {
-  opacity: 0.95;
-  padding: 0;
-}
-
-.dropdown-menu .dropdown-item {
-  background-color: #1d69b5;
-  color: #fadbbd !important;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.navbar a:hover,
-.active {
+.navbar a:hover {
   color: var(--primary) !important;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.nav-link.active {
+  color: var(--primary) !important;
+  position: relative;
+}
+
+.nav-link.active::before {
+  top: 0;
+}
+.nav-link.active::after {
+  bottom: 0;
+}
+
+.nav-link.active::before,
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.1px;
+  background: var(--primary);
 }
