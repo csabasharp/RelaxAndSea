@@ -18,14 +18,15 @@
 }
 
 .navbar a:hover {
+  text-shadow: 1px 1px 1px #be6b41;
   color: var(--primary) !important;
-  text-decoration: none;
-  opacity: 0.8;
 }
 
-.nav-link.active {
+.nav-link.active,
+.nav-link.active:hover {
   color: var(--primary) !important;
   position: relative;
+  text-shadow: none;
 }
 
 .nav-link.active::before {

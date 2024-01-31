@@ -96,7 +96,7 @@ footer {
   font-family: "Uni Sans Heavy";
 }
 
-.text-gradient {
+.nav-link.text-gradient {
   background: rgb(190, 107, 65);
   background: linear-gradient(
     0deg,
@@ -107,8 +107,7 @@ footer {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-.text-gradient:hover {
+.nav-link.text-gradient:hover {
   background: rgb(255, 181, 97);
   background: linear-gradient(
     0deg,
@@ -118,6 +117,43 @@ footer {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: 2px 2px 6px rgba(234, 91, 19, 0.3),
+    -2px -2px 6px rgba(238, 186, 108, 0.3);
+}
+
+.nav-link.active.text-gradient,
+.nav-link.active.text-gradient:hover {
+  background: rgb(255, 181, 97);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 181, 97, 1) 10%,
+    rgba(234, 91, 19, 1) 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.nav-link.active.text-gradient::before {
+  top: 0;
+}
+.nav-link.active::after {
+  bottom: 0;
+}
+
+.nav-link.active.text-gradient::before,
+.nav-link.active.text-gradient::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.1px;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 181, 97, 1) 10%,
+    rgba(234, 91, 19, 1) 70%
+  );
 }
 
 form {
@@ -168,5 +204,4 @@ form {
 
 .foglalasgomb:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
 }
