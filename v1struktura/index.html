@@ -14,6 +14,9 @@
       type="text/css"
       href="assets/styling/overwriteBootstrap.css"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/javascript/jsAjax.js" defer></script>
   </head>
 
   <body>
@@ -57,7 +60,7 @@
                 <a class="nav-link" href="wellness/wellness.html">Wellness</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Kapcsolat</a>
+                <a class="nav-link" href="contact.html">Elérhetőség</a>
               </li>
             </ul>
 
@@ -80,68 +83,112 @@
         </div>
       </nav>
     </header>
+    <div id="tartalom">
+      <form id="regurlap" action="./assets/php/login.php" method="post">
+        <p>
+          Hogy foglalhasson, foglalását nyomonkövethesse vagy módosítsa,
+          elősször egy új fiókot kell létrehoznia.
+        </p>
+        <p><b>Adatait nem osztjuk senkivel.</b></p>
+        <img src="assets/images/regpic.jpg" alt="regurlapKep" />
+        <div class="form-group">
+          <label for="nev">Név:</label>
 
-    <form id="regurlap">
-      Hogy foglalhasson, foglalását nyomonkövethesse vagy módosítsa, elősször
-      egy új fiókot kell létrehoznia.
-      <div class="form-group">
-        <label for="nevinput">Név:</label>
-        <input
-          type="text"
-          class="form-control"
-          id="nevinput"
-          placeholder="Jakab Gipsz"
-        />
-      </div>
-      <div class="form-group">
-        <label for="emailinput">Email cím:</label>
-        <input
-          type="email"
-          class="form-control"
-          id="emailinput"
-          aria-describedby="emailHelp"
-          placeholder="például: jakab60@gmail.com"
-        />
-        <small id="emailHelp" class="form-text text-muted"
-          >E-mail címét nem osztjuk senkivel.</small
-        >
-      </div>
-      <div class="form-group">
-        <label for="passwordinput">Jelszó:</label>
-        <input
-          type="password"
-          class="form-control"
-          id="passwordinput"
-          placeholder="*********"
-        />
-        <small id="pwhelp" class="form-text text-muted"
-          >Javasoljuk, hogy legalább 7 karakter legyen.</small
-        >
-      </div>
+          <input
+            required
+            type="text"
+            class="form-control uszoveg"
+            id="nev"
+            placeholder="Gipsz Jakab"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email cím:</label>
 
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="agecheck" />
-        <label class="form-check-label" for="agecheck">Elmúltam 16 éves.</label>
-      </div>
-      <button type="submit" class="btn" id="regbutton">Regisztráció</button>
-    </form>
+          <input
+            required
+            type="email"
+            class="form-control uszoveg"
+            id="email"
+            aria-describedby="emailHelp"
+            placeholder="gipszjakab@gmail.com"
+          />
+        </div>
 
-    <form id="loginurlap">
-      <div class="form-group">
-        <label for="emailinput">Email cím:</label>
-        <input type="email" class="form-control" id="emailinput" />
+        <div class="form-group">
+          <label for="telefon">Telefonszám:</label>
+          <span class="form-text text-muted alszoveg" id="telefonszamszoveg"
+            >csak számokat használjon</span
+          >
+          <input
+            required
+            type="tel"
+            class="form-control uszoveg"
+            id="telefon"
+            placeholder="06701234567"
+          />
+        </div>
+        <div class="form-group">
+          <label for="szuldat">Születési dátum:</label>
+          <span class="form-text text-muted alszoveg" id="szuldatminszoveg"
+            >legalább 16 éves kell legyen a foglaláshoz</span
+          >
+          <input
+            required
+            type="date"
+            class="form-control uszoveg"
+            id="szuldat"
+          />
+        </div>
+        <div class="form-group">
+          <label for="jelszo">Jelszó:</label>
+          <span class="form-text text-muted alszoveg" id="jelszominszoveg"
+            >minimum 8, maximum 50 karakter</span
+          >
+          <input
+            required
+            type="password"
+            class="form-control uszoveg"
+            id="jelszo"
+            placeholder="************"
+          />
+        </div>
+        <br />
+
+        <div class="form-check">
+          <input
+            required
+            type="checkbox"
+            class="form-check-input"
+            id="adatelf"
+          />
+          <b>
+            <label class="form-check-label" for="adatelf">
+              Elfogadom, hogy kapcsolatfelvétel céljából adataimat
+              kezeljék.</label
+            >
+          </b>
+        </div>
+        <br />
+        <button type="submit" value="regist" id="regist" class="btn">
+          Regisztráció
+        </button>
+      </form>
+      <div class="container">
+        <form class="loginurlap">
+          <div class="form-group">
+            <label for="email"></label>
+            <input type="email" class="form-control uszoveg" id="email" />
+          </div>
+          <div class="form-group">
+            <label for="jelszo">Jelszó:</label>
+            <input type="password" class="form-control uszoveg" id="jelszo" />
+          </div>
+          <button type="submit" class="btn">Bejelentkezés</button>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="passwordinput">Jelszó:</label>
-        <input type="password" class="form-control" id="passwordinput" />
-      </div>
-      <button type="submit" class="btn" id="loginbutton">Bejelentkezés</button>
-    </form>
-    <div id="scriptek">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="assets/javascript/jsfile1.js"></script>
     </div>
+
     <footer class="card-footer">
       Copyright © 2023-2024 - Hotel Relax & Sea - All Rights Reserved.
     </footer>
