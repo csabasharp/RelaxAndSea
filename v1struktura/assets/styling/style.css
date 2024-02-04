@@ -12,17 +12,31 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Uni Neue Light";
+  src: url("unifont/UniNeue-Light.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* font credit-et később az oldalon elhelyezni valahol: www.fontfabric.com*/
+
 html {
   font-size: 100%;
 }
 
+p {
+  font-family: "Uni Neue Light";
+}
+
 body {
-  background-color: #be6b41;
+  --bg: #be6b41;
   --normaltext: #fadbbd;
   --primary: #ffb561;
   --secondary: #162731;
   --accent: #0573e1;
-  color: var(--normaltext);
+  background-color: var(--bg);
+  color: var(--bg);
   font-family: "Uni Sans Thin";
 }
 
@@ -49,8 +63,7 @@ header {
 }
 
 footer {
-  padding-top: 10px;
-  position: absolute;
+  color: var(--normaltext);
   bottom: 0;
   left: 0;
   right: 0;
@@ -160,18 +173,46 @@ form {
   visibility: hidden;
 }
 
-#regbutton,
-#loginbutton {
-  border: 1.5px solid #008cba;
-  color: #008cba;
-  cursor: pointer;
-  transition: 0.3s;
+#regurlap {
+  font-family: "Uni Neue Light";
+  padding: 0.8%;
+  visibility: visible;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+  background-color: #052443ff;
+  color: var(--normaltext);
+  margin-top: 1rem;
+}
+#regurlap button {
+  background-color: #fcfbcfff;
+  color: #052443ff;
+
+  display: block;
+  margin: 0 auto;
+  font-weight: bold;
 }
 
-#regbutton:hover,
-#loginbutton:hover {
-  background-color: #008cba;
-  color: white;
+#regurlap img {
+  max-width: 25%;
+  max-height: 25%;
+  margin: 0 auto;
+
+  float: right;
+}
+.uszoveg {
+  background-color: #eaeaea;
+  width: 70%;
+  font-weight: bold;
+}
+
+#regurlap input {
+  border: 2px solid var(--secondary);
+}
+
+#regurlap button:hover {
+  background-color: #f86a5eff;
+  color: var(--normaltext);
 }
 
 .foglalasgomb {
@@ -205,3 +246,4 @@ form {
 .foglalasgomb:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
 }
+
