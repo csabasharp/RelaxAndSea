@@ -4,6 +4,11 @@
   max-height: 100px;
 }
 
+.navbar a:hover {
+  text-shadow: 1px 1px 1px #be6b41;
+  color: var(--primary) !important;
+}
+
 .navbar .navbar-brand,
 .nav-link {
   color: var(--normaltext) !important;
@@ -44,4 +49,23 @@
   right: 0;
   height: 1.1px;
   background: var(--primary);
+}
+
+.form-text.alszoveg {
+  color: lightcyan !important;
+  font-size: 95%;
+}
+
+.valid {
+  border-color: green !important;
+  border-width: 2px !important;
+}
+.invalid {
+  border-color: red !important;
+  border-width: 2px !important;
+}
+
+.helyes {
+  content: "✓" !important;
+  color: green !important;
 }
