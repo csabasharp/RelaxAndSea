@@ -23,7 +23,7 @@
 }
 
 .navbar a:hover {
-  text-shadow: 1px 1px 1px #be6b41;
+  text-shadow: 1px 0.5px 0.5px #be6b41;
   color: var(--primary) !important;
 }
 
@@ -65,7 +65,8 @@
   border-width: 2px !important;
 }
 
-.helyes {
-  content: "✓" !important;
-  color: green !important;
+footer .list-group-item {
+  background-color: inherit;
+  font-size: 60%;
+  color: beige;
 }
