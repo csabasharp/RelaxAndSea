@@ -1,0 +1,9 @@
+# Turn rewrite engine on
+Options +FollowSymlinks
+RewriteEngine on
+
+# map neat URL to internal URL
+RewriteRule ^api/([a-z]+)$   php/api/api.php?view=all&table=$1 [nc,qsa]
+RewriteRule ^api/([a-z]+)/([0-9]+)$   php/api/api.php?view=single&table=$1&id=$2 [nc,qsa]
+
+# localhost/api/tabla/  -> php/api/api.php?view=all&table=tabla
