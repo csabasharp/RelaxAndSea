@@ -72,6 +72,17 @@ class PDOOPCore{
         }
     }
 
+    public function rekordSzam(string $table)
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT COUNT(*) as 'db' FROM ".$table.";");
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            throw new Exception("Lekérdezés hiba.;".$e);
+        }
+    }
+
     
 }
 

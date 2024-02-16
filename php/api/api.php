@@ -78,7 +78,14 @@ $crud = new Crud($data,$_GET["table"],$_GET["id"]);
 
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "POST": //create
-        $reply["result"] = $crud->Create();
+        $result = $crud->Create();
+        if (!empty($result)) {
+            $reply["result"] = $result;
+        }
+        else {
+            $code = 400;
+            $reply["error"] = $simpleRest->getHttpStatusMessage($code);
+        }
         break;
         
     case 'GET': //read

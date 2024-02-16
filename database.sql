@@ -39,7 +39,17 @@ CREATE TABLE dolgozok(
     FOREIGN KEY (userId) REFERENCES userek(id)
 );
 
+CREATE TABLE logs(
+    id int(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    userId smallint NOT NULL,
+    uzenet varchar(200) NOT NULL,
+    datum datetime DEFAULT now(),
+    FOREIGN KEY (userId) REFERENCES userek(id)
+);
+
 INSERT INTO userek(id, nev, szuldat, telefon, email, jelszo) VALUES (1, "Amy Freeman", "2001-09-11", "+36604201337", "gaben@valvesoftware.com", "admin");
+INSERT INTO dolgozok VALUES(1,1,"guest");
+
 
 /*CREATE TABLE leltar(
     id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
