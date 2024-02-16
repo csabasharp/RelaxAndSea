@@ -1,6 +1,6 @@
 <?php
 
-if (!defined("INIT_CALLED")) {
+if (!isset($initCalled)||$initCalled != true) {
     exit("Initialisation called outside of function.");
 }
 

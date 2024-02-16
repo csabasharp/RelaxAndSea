@@ -1,15 +1,14 @@
 <?php
 
-require "../tools/alert.php";
-class PDOOP extends Alert {
+class PDOOPCore{
 
     //Készítette Kiss Máté Dominik
 
-    private $servername;
-    private $user;
-    private $password;
-    private $dbname;
-    private $charset;
+    protected $servername;
+    protected $user;
+    protected $password;
+    protected $dbname;
+    protected $charset;
 
     protected $conn;
 
@@ -19,23 +18,23 @@ class PDOOP extends Alert {
             $this->conn = new PDO('mysql:host='.$this->servername.';dbname='.$this->dbname.";charset=".$this->charset,$this->user,$this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new Exception($this->errorBuild("Csatlakozás sikertelen",$e));
+            throw new Exception("Csatlakozás sikertelen;".$e);
         }
-        
     }
 
     function __construct(){
-        require "./conf/init.php";
+        $initCalled = true;
+        require "./../core/init.php";
         $this->servername = $servername;
         $this->user = $user;
         $this->password = $password;
         $this->dbname = $dbname;
         $this->charset = $charset;
         $this->dev = $dev;
-        print $this->servername." ".$this->user." ".$this->password." ".$this->dbname." ".$this->charset;
+        # print $this->servername." ".$this->user." ".$this->password." ".$this->dbname." ".$this->charset;
     }
 
-    protected function launch($sql, array $params = null)
+    public function launch(string $sql, array $params = null)
     {
         try {
             $stmt = $this->conn->prepare($sql);
@@ -44,34 +43,42 @@ class PDOOP extends Alert {
             }else {
                 $stmt->execute($params);
             }
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
 
-            throw new Exception($this->errorBuild("Lekérdezés hiba.",$e));
+            throw new Exception("Lekérdezés hiba.;".$e);
         }
     }
 
-    private function oszlopAdatGet(string $table)
+    public function oszlopAdatGet(string $table)
     {
         try {
             $stmt = $this->conn->prepare("SELECT ORDINAL_POSITION as 'colPos', COLUMN_NAME as 'colName', IF(EXTRA='auto_increment','ai',null) as 'extra' FROM information_schema.columns WHERE table_name = '".$table."'");
             $stmt->execute();
             return $stmt->fetchAll();
         } catch (PDOException $e) {
-            throw new Exception($this->errorBuild("Lekérdezés hiba.",$e));
+            throw new Exception("Lekérdezés hiba.;".$e);
         }
     }
 
-    private function oszlopSzam(string $table)
+    public function oszlopSzam(string $table)
     {
         try {
             $stmt = $this->conn->prepare("SELECT COUNT(*) as 'colSzam' FROM information_schema.columns WHERE table_name = '".$table."'");
             $stmt->execute();
             return $stmt->fetchColumn();
         } catch (PDOException $e) {
-            throw new Exception($this->errorBuild("Lekérdezés hiba.",$e));
+            throw new Exception("Lekérdezés hiba.;".$e);
         }
     }
+
+    
+}
+
+class PDOOP extends PDOOPCore
+{
+    // A PDOOP kifejezetten arra jó hogy felhasználóval kommunkálni tudjon az sql szerver,
+    //attól függően hogy sikeres vagy sikertelen volt a művele
 
     public function simplePrepStat(string $sql, array $params = null)
     {
@@ -84,13 +91,12 @@ class PDOOP extends Alert {
 
     
 
-    protected function selectComplex($fields, array $params = null)
+    public function selectComplex($fields, array $params = null)
     {
         throw new Exception("Not Implemented", 1);
         
         if (is_null($this->conn)) {
-            print $this->errorBuild("Kapcsolat nem volt létrehozva futtatás előtt");
-            return false;
+            print $this->exceptionHandler("Kapcsolat nem volt létrehozva futtatás előtt");
         }
 
         if (is_array($fields)) { //ha tömb akkor tömbként kezelje
@@ -115,7 +121,7 @@ class PDOOP extends Alert {
         
         if(!is_null($this->conn))
         {
-            throw new Exception("<p class='error'>Kapcsolat nem volt létrehozva futtatás előtt.</p>");
+            throw new Exception($this->exceptionHandler("Kapcsolat nem volt létrehozva futtatás előtt."));
         }
         if(is_array($select)&&!is_string($select))
         {
@@ -167,7 +173,7 @@ class PDOOP extends Alert {
                 $stmt = $this->conn->prepare($select);
                 $stmt->execute();
             } catch (PDOException $e) {
-                throw new Exception($this->errorBuild("Lekérdezés hiba",$e));
+                throw new Exception($this->exceptionHandler("Lekérdezés hiba",$e));
             }
         }
         else {
@@ -176,7 +182,7 @@ class PDOOP extends Alert {
                     $stmt = $this->conn->prepare($select);
                     $stmt->execute($params);
                 } catch (PDOException $e) {
-                    throw new Exception($this->errorBuild("Lekérdezés hiba",$e));
+                    throw new Exception($this->exceptionHandler("Lekérdezés hiba",$e));
                 }
             }
             else {
@@ -186,95 +192,6 @@ class PDOOP extends Alert {
         }
         # return $stmt->fetchAll();
     }
-
-    /*public function select($select = [], array $params = [])
-    {
-        //hogyha select az egy tömb akkor szétszedi elemeire és össze rakja a lekérdezést
-        //hogyha string akkor kéri a "params" tömböt is hogy elvégezze a lekérdezést
-        if(!is_null($this->conn))
-        {
-            if(is_array($select)&&!is_string($select))
-            {
-                $params = [];
-                $selected = "";
-                if (isset($select['SELECT'])) {
-                    $selected = "SELECT ";
-                    $num = 0;
-                    $split = preg_split("/,/",$select['SELECT'],-1);
-                    foreach ($split as $part) {
-                        ($num > 0) ? $selected .= ", " : "";
-                        $params[":s".$num] = $part;
-                        unset($params[$num]);
-                        $selected .= ":s".$num;
-                        $num++;
-                    }
-                    $selected .= ' ';
-                }
-                else
-                {
-                    $params[":s0"] = "*";
-                    $selected .= ":s0";
-                    # array_push($params,"*");
-                }
-
-                if (isset($select['FROM'])) {
-                    $selected .= "FROM ".$select['FROM']." ";
-                }
-                else {
-                    return false;
-                }
-
-                if (isset($select['WHERE'])) {
-                    $selected .= "WHERE {$select['WHERE']} ";
-                }
-                if (isset($select['GROUP BY'])) {
-                    $selected .= "GROUP BY {$select['GROUP BY']} ";
-                }
-                if (isset($select['HAVING'])) {
-                    $selected .= "HAVING {$select['HAVING']} ";
-                }
-                if (isset($select['ORDER BY'])) {
-                    $selected .= "ORDER BY {$select['ORDER BY']} ";
-                }
-                if (isset($select['LIMIT'])) {
-                    $selected .= "LIMIT {$select['LIMIT']} ";
-                }
-
-                $select = $selected.";";
-                
-
-                print($select."".print_r($params));
-                try {
-                    $stmt = $this->conn->prepare($select);
-                    $stmt->execute($params);
-                    return $stmt->fetchAll();
-                } catch (PDOException $e) {
-                    echo "<p class='error'>Tömb alapú lekérdezés hiba: ".$e->getMessage()."</p>";
-                    return false;
-                }
-            }
-            else {
-                if (is_string($select) && str_starts_with($select,"SELECT")) {
-                    print_r($params);
-                    try {
-                        $stmt = $this->conn->prepare($select);
-                        $stmt->execute($params);
-                        return $stmt->fetchAll();
-                    } catch (PDOException $e) {
-                        echo "<p class='error'>Lekérdezés hiba: ".$e->getMessage()."</p>";
-                        return false;
-                    }
-                }
-                else {
-                    return false;
-                }
-                
-            }
-        }
-        print "<p class='error'>Kapcsolat nem volt létrehozva futtatás előtt.</p>";
-        return false;
-    }
-    */
 
     /* 
     Selecthez bekért adat: string, array
@@ -290,7 +207,7 @@ class PDOOP extends Alert {
         */
         if(is_null($this->conn))
         {
-            throw new Exception($this->errorBuild("Kapcsolat nem volt létrehozva futtatás előtt."));
+            throw new Exception("Kapcsolat nem volt létrehozva futtatás előtt.");
         }
         if (is_string($insert)) {
 
@@ -308,16 +225,14 @@ class PDOOP extends Alert {
             try {
                 $stmt = $this->conn->prepare($insert);
                 $stmt->execute($params);
-                print $this->alertBuild("Sikeres feltöltés!");
                 return true;
             } catch (PDOException $e) {
-                throw new Exception($this->errorBuild("Feltöltés hiba.",$e));
+                throw new Exception("Feltöltés hiba.".$e);
             }
         }
-        throw new Exception($this->errorBuild("Ismeretlen hiba. Feltöltés sikertelen."));
+        throw new Exception("Ismeretlen hiba. Feltöltés sikertelen.");
             
     }
 }
-
 
 ?>
