@@ -73,7 +73,7 @@ class Crud extends PDOOPCore
                     $reply = array();
                 }
             }
-
+            
         }
         else {
             $reply = array();
@@ -83,7 +83,7 @@ class Crud extends PDOOPCore
             $this->SaveLog("Attempted create in $this->table, but failed.");
         }
         else {
-            $this->SaveLog("Created new entry in $this->table with id ".$this->rekordSzam($this->table));
+            $this->SaveLog("Created new entry in $this->table with id of ".$this->rekordSzam($this->table));
         }
         return $reply;
     }
@@ -122,7 +122,7 @@ class Crud extends PDOOPCore
         } catch (\Throwable $th) {
             print $th;
         }
-
+        
 
         return $reply;
     }
