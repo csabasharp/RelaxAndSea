@@ -74,7 +74,7 @@ footer {
 
 footer #jog {
   opacity: 0.7;
-  
+
   color: inherit;
   font-size: 60%;
   background-color: #936044;
@@ -210,6 +210,10 @@ form {
   background-color: #052443ff;
   color: var(--normaltext);
   margin-top: 1rem;
+  border-radius: 20px;
+  border-style: solid;
+  opacity: 0.9;
+  border-color: rgb(11, 61, 112);
 }
 #regurlap button {
   background-color: #fcfbcfff;
@@ -224,23 +228,21 @@ form {
   max-width: 25%;
   max-height: 25%;
   margin: 0 auto;
-
+  border-radius: 15px;
   float: right;
 }
-.uszoveg {
-  background-color: #eaeaea;
-  width: 70%;
-  font-weight: bold;
-}
-
 #regurlap input {
-  width: 30;
   border: 2px solid var(--secondary);
 }
 
 #regurlap button:hover {
   background-color: #f86a5eff;
   color: var(--normaltext);
+}
+.uszoveg {
+  background-color: #eaeaea;
+  width: 70%;
+  font-weight: bold;
 }
 
 .foglalasgomb {

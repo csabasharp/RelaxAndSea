@@ -56,17 +56,30 @@
   font-size: 95%;
 }
 
-.valid {
-  border-color: green !important;
+.pipa {
+  /* megjelenéskor: display: inline-block; */
+  display: none;
+  border-color: green;
+  content: "\2713";
+}
+.rosszx {
+  /* megjelenéskor: display: inline-block; */
+  display: none;
+  border-color: red;
+  content: "\0058";
+}
+
+.validkeret {
+  border-color: darkgreen !important;
   border-width: 2px !important;
 }
-.invalid {
+.invalidkeret {
   border-color: red !important;
   border-width: 2px !important;
 }
 
 footer .list-group-item {
   background-color: inherit;
-  font-size: 60%;
+  font-size: 65%;
   color: beige;
 }

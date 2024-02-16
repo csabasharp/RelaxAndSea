@@ -7,8 +7,7 @@ window.onload = function () {
   var telefonszamszoveg = document.getElementById("telefonszamszoveg");
   var emailinput = document.getElementById("email");
   var nevinput = document.getElementById("nev");
-  var nevminszoveg = document.getElementById("nevminszoveg");
-  var emailminszoveg = document.getElementById("emailminszoveg");
+
   var regurlap = document.getElementById("regurlap");
 
   function emailEllenorzes(emailinput) {
@@ -21,15 +20,16 @@ window.onload = function () {
   function nevEllenorzes(nevinput) {
     if (nevinput.value.length >= 3 && nevinput.value.includes(" ")) {
       return true;
-    }
-    return false;
+    } else return false;
   }
 
   function jelszoEllenorzes(jelszoinput) {
     if (jelszoinput.value.length >= 8 && jelszoinput.value.length <= 50) {
       return true;
+    } else {
+      jelszominszoveg.textContent = "rövid jelszó";
+      return false;
     }
-    return false;
   }
 
   function telefonEllenorzes(telefoninput) {
@@ -37,8 +37,7 @@ window.onload = function () {
     if (regex.test(telefoninput.value)) {
       return true;
     } else {
-      telefonszamszoveg.textContent =
-        "a telefonszám csak számokat tartalmazhat.";
+      telefonszamszoveg.textContent = "érvénytelen telefonszám";
       return false;
     }
   }
@@ -56,7 +55,8 @@ window.onload = function () {
     }
 
     if (korDatumEv > 110) {
-      szuldatminszoveg.style.content = "érvénytelen dátum";
+      szuldatminszoveg.style.content = "érvénytelen születési dátum";
+      return false;
     }
 
     if (korDatumEv >= 16 && korDatumEv < 110) {
