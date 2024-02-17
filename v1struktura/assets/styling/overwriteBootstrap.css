@@ -1,12 +1,17 @@
 .navbar {
   padding: 0.01rem 1rem;
   font-weight: bold;
-  max-height:100px;
+  max-height: 100px;
+}
+
+.navbar a:hover {
+  text-shadow: 1px 1px 1px #be6b41;
+  color: var(--primary) !important;
 }
 
 .navbar .navbar-brand,
 .nav-link {
-  color: #fadbbd !important;
+  color: var(--normaltext) !important;
 }
 
 .navbar .nav-item .nav-link.active {
@@ -17,21 +22,51 @@
   display: flex;
 }
 
-.dropdown-menu {
-  opacity: 0.95;
-  padding: 0;
-}
-
-.dropdown-menu .dropdown-item {
-  background-color: #1d69b5;
-  color: #fadbbd !important;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.navbar a:hover,
-.active {
+.navbar a:hover {
+  text-shadow: 1px 0.5px 0.5px #be6b41;
   color: var(--primary) !important;
+}
+
+.nav-link.active,
+.nav-link.active:hover {
+  color: var(--primary) !important;
+  position: relative;
+  text-shadow: none;
+}
+
+.nav-link.active::before {
+  top: 0;
+}
+.nav-link.active::after {
+  bottom: 0;
+}
+
+.nav-link.active::before,
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.1px;
+  background: var(--primary);
+}
+
+.form-text.alszoveg {
+  color: lightcyan !important;
+  font-size: 95%;
+}
+
+.valid {
+  border-color: green !important;
+  border-width: 2px !important;
+}
+.invalid {
+  border-color: red !important;
+  border-width: 2px !important;
+}
+
+footer .list-group-item {
+  background-color: inherit;
+  font-size: 60%;
+  color: beige;
 }

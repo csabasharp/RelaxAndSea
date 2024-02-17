@@ -14,7 +14,14 @@
       type="text/css"
       href="assets/styling/overwriteBootstrap.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/javascript/jsAjax.js" defer></script>
   </head>
 
   <body>
@@ -44,32 +51,10 @@
                   >Kezdőlap</a
                 >
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
+              <li class="nav-item">
+                <a class="nav-link" href="szobaink/szobaink.html"
+                  >Szobáink és árai</a
                 >
-                  Szobáink és Foglalás
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    <a class="dropdown-item" href="foglalas/foglalas.html">
-                      Foglalás
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="foglalas/szobaink/szobaink.html"
-                    >
-                      Szobáink
-                    </a>
-                  </li>
-                </ul>
               </li>
 
               <li class="nav-item">
@@ -82,13 +67,20 @@
                 <a class="nav-link" href="wellness/wellness.html">Wellness</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Kapcsolat</a>
+                <a class="nav-link" href="contact.html">Elérhetőség</a>
               </li>
             </ul>
+
             <ul class="navbar-nav">
               <li class="nav-item">
+                <a class="nav-link foglalasgomb" href="#regurlap">Foglalás</a>
+              </li>
+              <li class="nav-item">
                 <div class="login-link">
-                  <a class="nav-link text-gradient" id="login" href="belepes/login.html"
+                  <a
+                    class="nav-link text-gradient"
+                    id="login"
+                    href="#loginurlap"
                     >Bejelentkezés</a
                   >
                 </div>
@@ -98,11 +90,184 @@
         </div>
       </nav>
     </header>
+    <div id="tartalom">
+      <form id="regurlap" action="./assets/php/account.php" method="post">
+        <p>
+          Hogy foglalhasson, foglalását nyomonkövethesse vagy módosítsa,
+          elősször egy új fiókot kell létrehoznia.
+        </p>
+        <p><b>Adatait nem osztjuk senkivel.</b></p>
+        <img src="assets/images/regpic.jpg" alt="regurlapKep" />
+        <div class="form-group">
+          <label for="nev">Teljes név:</label>
+          <span></span>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+          <input
+            required
+            type="text"
+            class="form-control uszoveg"
+            id="nev"
+            name="nev"
+            placeholder="Gipsz Jakab"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email cím:</label>
+          <span></span>
+          <input
+            required
+            type="email"
+            class="form-control uszoveg"
+            id="email"
+            name="email"
+            aria-describedby="emailHelp"
+            placeholder="gipszjakab@gmail.com"
+          />
+        </div>
 
-    <footer class="card-footer">
-      Copyright © 2023-2024 - Hotel Relax & Sea - All Rights Reserved.
+        <div class="form-group">
+          <label for="telefon">Telefonszám:</label>
+          <span class="form-text text-muted alszoveg" id="telefonszamszoveg">
+            7
+          </span>
+          <div style="display: flex">
+            <input
+              readonly
+              type="tel"
+              class="form-control"
+              id="prefix"
+              value="06"
+            />
+            <input
+              required
+              type="tel"
+              class="form-control uszoveg"
+              id="telefon"
+              name="telefon"
+              placeholder="701234567"
+              pattern="[0-9]{1,7}"
+              maxlength="9"
+              minlength="9"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="szuldat">Születési dátum:</label>
+          <span class="form-text text-muted alszoveg" id="szuldatminszoveg"
+            >legalább 16 éves kell legyen a foglaláshoz</span
+          >
+          <input
+            required
+            type="date"
+            class="form-control uszoveg"
+            id="szuldat"
+            name="szuldat"
+          />
+        </div>
+        <div class="form-group">
+          <label for="jelszo">Jelszó:</label>
+          <span class="form-text text-muted alszoveg" id="jelszominszoveg"
+            >minimum 8, maximum 50 karakter</span
+          >
+          <input
+            required
+            type="password"
+            class="form-control uszoveg"
+            id="jelszo"
+            placeholder="************"
+            name="jelszo"
+          />
+        </div>
+        <br />
+
+        <div class="form-check">
+          <input
+            required
+            type="checkbox"
+            class="form-check-input"
+            id="adatelf"
+          />
+          <b>
+            <label class="form-check-label" for="adatelf">
+              Elfogadom, az adatvédelmi nyilatkozatot.</label
+            >
+          </b>
+        </div>
+        <br />
+        <button
+          type="submit"
+          value="regist"
+          name="submit"
+          id="regist"
+          class="btn"
+        >
+          Regisztráció
+        </button>
+      </form>
+      <div class="container">
+        <form class="loginurlap">
+          <div class="form-group">
+            <label for="email">E-mail cím:</label>
+            <input
+              type="email"
+              class="form-control uszoveg"
+              id="email"
+              name="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="jelszo">Jelszó:</label>
+            <input
+              type="password"
+              class="form-control uszoveg"
+              id="jelszo"
+              name="jelszo"
+            />
+          </div>
+          <button type="submit" name="submit" class="btn" onsubmit="">
+            Bejelentkezés
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div
+        id="kapcsolatfelvetel"
+        class="text-reset d-flex justify-content-center"
+      >
+        <ul class="list-group">
+          <li class="list-group-item contactelem d-flex align-items-center">
+            <i class="bi bi-envelope"></i> Email: relax.and.sea.hotel@gmail.com
+          </li>
+          <li class="list-group-item contactelem d-flex align-items-center">
+            <i class="bi bi-telephone align-items-center"></i>
+            Telefonszám: 06 112345678
+          </li>
+          <li class="list-group-item contactelem d-flex align-items-center">
+            <i class="bi bi-geo-alt"></i> Cím: Budapest, Létező Tengerpart utca
+            4.
+          </li>
+        </ul>
+      </div>
+
+      <div id="jog" class="text-reset">
+        Copyright © 2023-2024 - Hotel Relax & Sea - Minden jog fenntartva.
+
+        <p id="jogilinkek">
+          <a
+            href="https://www.fontfabric.com/fontfabric-commercial-eula-for-free-fonts/"
+            target="_blank"
+            >Fontfabric</a
+          >
+          <a
+            href="https://gist.github.com/kn9ts/cbe95340d29fc1aaeaa5dd5c059d2e60"
+            >Licensz</a
+          >
+          <a href="">Adatvédelem</a>
+        </p>
+      </div>
     </footer>
   </body>
 </html>
