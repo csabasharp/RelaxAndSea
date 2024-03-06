@@ -10,13 +10,27 @@ class siteBuilder
     function __construct()
     {
         define("BUILT_BY_PHP",true);
+       #define("DEFAULT_FOLDER","v1struktura");
+        $this->inhead = false;
+        $this->inbody = false;
+    }
+
+    public function requirePart(string $fajl)
+    {
+        require "parts/$fajl";
     }
 
     public function toPlace(string $location = null) : string
     {
         $ret = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'];
+        if (defined("DEFAULT_FOLDER")) {
+            $ret .= "/".constant("DEFAULT_FOLDER")."/";
+        }
+        else {
+            $ret .= "/";
+        }
         if (isset( $location )&&!is_null($location)) {
-            $ret .= '/'.$location;
+            $ret .= $location;
         }
         return $ret;
     }
@@ -47,12 +61,12 @@ class siteBuilder
         $this->inhead = false;
 
         $head = "<head>";
-        $head .= require "./parts/head.php";
+        $head .= require "parts/head.php";
         $head .= "</head>";
         return $head;
     }
 
-    public function bodyStart(string $page = "home") : string
+    public function bodyStart($page = "home") : string
     {
         if ($this->inhead === true) {
             throw new Exception("Already in head!");
@@ -63,7 +77,7 @@ class siteBuilder
         $this->inbody = true;
 
         $navbar .= "<body>";
-        $navabar = require "./parts/navbar.php";
+        $navabar = require "parts/navbar.php";
         return $navbar;
     }
 
@@ -77,7 +91,7 @@ class siteBuilder
         }
         $this->inbody = false;
 
-        $footer = require "./parts/footer.php";
+        $footer = require "parts/footer.php";
         $footer .= "</body></html>";
         return $footer;
     }
