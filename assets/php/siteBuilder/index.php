@@ -20,6 +20,11 @@ class siteBuilder
         require "parts/$fajl";
     }
 
+    public function loadPage(string $fajl)
+    {
+        require "page/$fajl";
+    }
+
     public function toPlace(string $location = null) : string
     {
         $ret = $_SERVER['REQUEST_SCHEME']."://".$_SERVER['SERVER_NAME'];

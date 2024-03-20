@@ -23,6 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?php echo $this->toPlace("/assets/javascript/jsAjax.js")?>" defer></script>
     <script src="<?php echo $this->toPlace("/assets/javascript/jsTools.js")?>" defer></script>
+    <script src="<?php echo $this->toPlace("/assets/javascript/md5.min.js")?>" defer></script>
 <?php
     }
 

@@ -176,7 +176,7 @@ class ApiGrabber{
             }
         }
         else
-            {console.error("Params was not an object."); return Promise.reject(false);}
+            {console.error(msg+"Params was not an object."); return Promise.reject(false);}
 
         var ret;
         var success;
