@@ -21,7 +21,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="http://localhost/RelaxAndSea/v1struktura/assets/javascript/jsAjax.js" defer></script>
+    <script src="<?php echo $this->toPlace("/assets/javascript/jsAjax.js")?>" defer></script>
+    <script src="<?php echo $this->toPlace("/assets/javascript/jsTools.js")?>" defer></script>
 <?php
     }
 

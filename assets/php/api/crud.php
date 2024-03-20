@@ -94,7 +94,8 @@ class Crud extends PDOOPCore
                 }
                 $query .= ");";
                 try {
-                    $this->launch($query,$this->data->values);
+                  $this->launch($query,$this->data->values);
+                  $reply["id"] =  $this->conn->lastInsertId();
                 } catch (\Throwable $th) {
                     $reply = array();
                 }
@@ -112,7 +113,7 @@ class Crud extends PDOOPCore
             $reply["message"] = $message;
         }
         else {
-            $message = "created new entry in $this->table with id of ".$this->rekordSzam($this->table);
+            $message = "created new entry in $this->table with id of ".$reply["id"];
             $this->SaveLog($message);
             $reply["status"] = "success";
             $reply["message"] = $message;
@@ -136,6 +137,7 @@ class Crud extends PDOOPCore
         $query .= ";";
         try {
             $reply["$this->table"] = $this->launch($query,$params);
+            
         } catch (\Throwable $th) {
             $message .= "failed";
             $reply = array();
@@ -148,6 +150,9 @@ class Crud extends PDOOPCore
             $reply["status"] = "failed";
         }
         elseif (!empty($reply["$this->table"])) {
+            if (!is_null($reply["$this->table"]) && isset($this->id)) {
+                $reply[$this->table]= $reply[$this->table][0];
+            }
             $message .= "success";
             $reply["status"] = "success";
         }

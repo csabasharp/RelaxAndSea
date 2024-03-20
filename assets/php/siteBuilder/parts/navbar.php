@@ -57,14 +57,29 @@ else {
               <li class="nav-item">
                 <a class="nav-link foglalasgomb" href="#regurlap">Foglalás</a>
               </li>
+            </ul>
+            <ul class="navbar-nav">
               <li class="nav-item">
                 <div class="login-link">
+                  <?php if(isset($_SESSION) && !is_null($_SESSION["username"])):?>
+                  <div>
+                  <span class="nav-item">Üdv, <?php echo $_SESSION["username"];?></span>
+                  <a
+                    class="nav-link text-gradient"
+                    id="login"
+                    href="<?php echo $this->toPlace("account/");?>"
+                    >Fiók
+                  </a>
+                  <?php else: ?>
                   <a
                     class="nav-link text-gradient"
                     id="login"
                     href="#loginurlap"
+                    data-bs-toggle="modal" 
+                    data-bs-target="#reglog"
                     >Bejelentkezés</a
                   >
+                  <?php endif; ?>
                 </div>
               </li>
             </ul>

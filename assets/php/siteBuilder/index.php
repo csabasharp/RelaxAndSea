@@ -35,7 +35,7 @@ class siteBuilder
         return $ret;
     }
 
-    public function headStart(string $lang = "hu") : string
+    public function headStart(string $lang = "hu")
     {
         if ($this->inhead === true) {
             throw new Exception("Already in head!");
@@ -47,7 +47,7 @@ class siteBuilder
 
         $start = "<!DOCTYPE html>";
         $start .= "<html lang='".$lang."'>";
-        return $start;
+        print $start;
     }
 
     public function headStop(array $params = null) : string // ötlet: array(array(érték)) tömbben, tag alapján tömb, értékkekkel

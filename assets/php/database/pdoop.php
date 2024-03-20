@@ -83,6 +83,17 @@ class PDOOPCore{
         }
     }
 
+    public function maxId(string $table)
+    {
+        try {
+            $stmt = $this->conn->prepare("SELECT MAX(id) as 'id' FROM ".$table.";");
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        } catch (PDOException $e) {
+            throw new Exception("Lekérdezés hiba.;".$e);
+        }
+    }
+
     
 }
 

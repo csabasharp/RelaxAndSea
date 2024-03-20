@@ -1,5 +1,14 @@
 <?php
 require("simpleRest.php");
+require("../core/headers.php");
+
+if ($_SERVER["REQUEST_METHOD"] === "OPTIONS") {
+    header("Allow: GET, POST, PUT, DELETE");
+    header("Access-Control-Allow-*");
+    header("Access-Control-Allow-Methods: GET,PUT,POST,DELETE");
+    $simpleRest->statusSet(200);
+    return;
+}
 
 function apiCheck(string $key)
 {
@@ -32,8 +41,10 @@ function apiCheck(string $key)
     
 }
 
-$data = file_get_contents('php://input');
-$data = json_decode($data);
+if($_SERVER["REQUEST_METHOD"] != "GET"){
+    $data = file_get_contents('php://input');
+    $data = json_decode($data);
+}
 $reply = array();
 $reply["code"] = 200;
 $reply["table"] = $_GET["table"];
@@ -149,7 +160,12 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         unset($result["status"]);
         unset($result["action"]);
         if (!empty($result)) {
-            $reply["result"] = $result;
+            if (isset($_GET["id"]) && !is_null(isset($_GET["id"]))) {
+                $reply["result"] = $result;
+            }
+            else {
+                $reply["result"] = $result[$_GET["table"]];
+            }
         }
         else {
             $code = 404;
@@ -187,7 +203,32 @@ switch ($_SERVER["REQUEST_METHOD"]) {
         break;
 
     case "DELETE": //delete
-        $reply["result"] = $crud->Delete();
+        $result = $crud->Delete();
+        $reply["action"] = $result["action"];
+        $reply["status"] = $result["status"];
+        
+        if ($reply["status"] == "success") {
+            if (!is_null($result["result"])) {
+                $reply["result"] = $result["result"];
+            }
+            $code = 200;
+        }
+        else if($reply["status"] == "failed") {
+            $code = 400;
+            if (!is_null($result["result"])) {
+                $reply["result"] = $result["result"];
+            }
+            $reply["reason"] = $simpleRest->getHttpStatusMessage($code);
+            if (isset($result["reason"]) && !is_null($result["reason"])) {
+                $reply["reason"] = $result["reason"];
+            }
+            
+        }
+        else {
+            $code = 500;
+            $reply["reason"] = $simpleRest->getHttpStatusMessage($code);
+        }
+
         break;
     
     default:
