@@ -4,42 +4,46 @@
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: "Uni Sans Heavy";
   src: url("unifont/Uni\ Sans\ Heavy.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: "Uni Neue Light";
   src: url("unifont/UniNeue-Light.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
-
-/* font credit-et később az oldalon elhelyezni valahol: www.fontfabric.com*/
-
-html {
-  font-size: 100%;
-}
-
-p {
-  font-family: "Uni Neue Light";
-}
-
-body {
+:root {
   --bg: #be6b41;
+
   --normaltext: #fadbbd;
   --primary: #ffb561;
   --secondary: #162731;
   --accent: #0573e1;
+
+  /* világosabb szín */
+  --reszlegnormaltext: rgb(227, 255, 252);
+  /* sötétebb szín */
+  --reszlegbg: linear-gradient(
+    150deg,
+    rgb(219, 141, 92) 0%,
+    rgb(211, 109, 54) 100%
+  );
+}
+html {
+  font-size: 100%;
+}
+p {
+  font-family: "Uni Neue Light";
+}
+body {
   background-color: var(--bg);
   color: var(--normaltext);
   font-family: "Uni Sans Thin";
 }
-
 h1,
 h2,
 h3,
@@ -51,17 +55,6 @@ h5 {
 header {
   background-color: var(--accent);
 }
-
-.relaxlogoszoveg {
-  text-align: center;
-}
-
-.relaxlogoszoveg img {
-  width: 8.078125vw;
-  display: block;
-  margin: auto;
-}
-
 footer {
   bottom: 0;
   left: 0;
@@ -70,16 +63,13 @@ footer {
   text-align: center;
   text-transform: uppercase;
   height: 3rem;
+  width: 100%;
 }
-
 footer #jog {
-  opacity: 0.7;
-
   color: inherit;
-  font-size: 60%;
-  background-color: #936044;
+  font-size: 65%;
+  background-color: #294a6b;
 }
-
 footer #jog a {
   text-decoration-style: dashed;
   color: inherit;
@@ -90,19 +80,24 @@ footer #jog a:hover {
 footer #jogilinkek {
   word-spacing: 1.5rem;
 }
-
 footer #kapcsolatfelvetel {
-  background-color: rgba(122, 83, 64, 0.5);
+  background-color: #2e567d;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-
+.relaxlogoszoveg {
+  text-align: center;
+}
+.relaxlogoszoveg img {
+  width: 8.078125vw;
+  display: block;
+  margin: auto;
+}
 .logo-container {
   margin-top: 100px;
   position: relative;
   display: inline-block;
 }
-
 .logo-container::before {
   content: "Relax & Sea";
   position: absolute;
@@ -114,11 +109,9 @@ footer #kapcsolatfelvetel {
   left: -1vw;
   width: 150px;
 }
-
 .logo-container:hover::before {
   color: var(--primary);
 }
-
 .logo-container::after {
   content: "";
   position: absolute;
@@ -131,11 +124,9 @@ footer #kapcsolatfelvetel {
   background: var(--accent);
   z-index: -1;
 }
-
 #login {
   font-family: "Uni Sans Heavy";
 }
-
 .nav-link.text-gradient {
   background: rgb(190, 107, 65);
   background: linear-gradient(
@@ -160,7 +151,6 @@ footer #kapcsolatfelvetel {
   text-shadow: 2px 2px 6px rgba(234, 91, 19, 0.3),
     -2px -2px 6px rgba(238, 186, 108, 0.3);
 }
-
 .nav-link.active.text-gradient,
 .nav-link.active.text-gradient:hover {
   background: rgb(255, 181, 97);
@@ -174,14 +164,12 @@ footer #kapcsolatfelvetel {
   -webkit-text-fill-color: transparent;
   text-shadow: none;
 }
-
 .nav-link.active.text-gradient::before {
   top: 0;
 }
 .nav-link.active::after {
   bottom: 0;
 }
-
 .nav-link.active.text-gradient::before,
 .nav-link.active.text-gradient::after {
   content: "";
@@ -195,56 +183,54 @@ footer #kapcsolatfelvetel {
     rgba(234, 91, 19, 1) 70%
   );
 }
-
 form {
   visibility: hidden;
+}
+.urlapkozepen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 
 #regurlap {
   font-family: "Uni Neue Light";
-  padding: 0.8%;
-  visibility: visible;
-  justify-content: center;
-  width: 70%;
-  margin: 0 auto;
+  padding: 1.8%;
   background-color: #052443ff;
   color: var(--normaltext);
-  margin-top: 1rem;
-  border-radius: 20px;
+  border-radius: 25px;
   border-style: solid;
   opacity: 0.9;
   border-color: rgb(11, 61, 112);
+  width: 75%;
 }
 #regurlap button {
   background-color: #fcfbcfff;
   color: #052443ff;
-
   display: block;
   margin: 0 auto;
   font-weight: bold;
 }
-
-#regurlap img {
-  max-width: 25%;
-  max-height: 25%;
-  margin: 0 auto;
-  border-radius: 15px;
-  float: right;
-}
-#regurlap input {
-  border: 2px solid var(--secondary);
-}
-
 #regurlap button:hover {
   background-color: #f86a5eff;
   color: var(--normaltext);
 }
+#regurlap img {
+  max-width: 65%;
+  max-height: 65%;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
 .uszoveg {
   background-color: #eaeaea;
-  width: 70%;
   font-weight: bold;
+  max-width: 80%;
 }
-
+.form-group .form-check {
+  margin-bottom: 3px;
+  margin-top: 1rem;
+}
 .foglalasgomb {
   text-transform: uppercase;
   text-decoration: none;
@@ -252,31 +238,141 @@ form {
   transition: all 0.2s;
   background-color: #0063c6;
 }
-
 .foglalasgomb:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
-
 .foglalasgomb:active {
   transform: translateY(-1px);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
-
 .foglalasgomb::after {
   content: "";
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
-
   transition: all 0.4s;
 }
-
 .foglalasgomb:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
 }
+#adatvedelemurlap {
+  color: var(--normaltext);
+  font-weight: bold;
+}
+#adatvedelemurlap a {
+  color: inherit;
+  font-weight: inherit;
+}
+#adatvedelemurlap a:hover {
+  opacity: 0.8;
+}
+#reszleg {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 85%;
+  max-height: 85%;
+  font-family: "Uni Neue Light";
+  padding: 1rem;
+  font-weight: bolder;
+  background-image: var(--reszlegbg);
+  border-radius: 25px;
+  text-shadow: 0px 0px 1px rgba(239, 239, 239, 0.466);
+}
+#reszleg h3 {
+  letter-spacing: 2.5px;
+  text-align: center;
+  text-underline-offset: 9px;
+  margin-bottom: 2rem;
+  text-decoration: underline;
+}
 
-#prefix {
-  max-width: 23.5%;
+#reszleg p {
+  text-align: left;
+}
+
+#reszleg img {
+  border-radius: 100%;
+}
+
+#rolunk img {
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+    rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+#rolunk img:hover {
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+#reszleg figcaption {
+  font-style: italic;
+  font-size: smaller;
+}
+
+#rolunk #hotelkep,
+#rolunk #hotelkep img {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 65%;
+  text-align: center;
+  display: block;
+}
+#rolunk #hamiltonportrekep,
+#rolunk #hamiltonportrekep img {
+  float: right;
+  max-width: 50%;
+  text-align: right;
+  display: block;
+}
+
+#reszleg li {
+  margin: 0;
+  padding: 18px 0px 20px 50px;
+  list-style: none;
+  background-image: url("../images/LogoSarga.png");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 38px;
+}
+
+.szobakep {
+  border: 2px solid black;
+  border-radius: 10px;
+  opacity: 0.7;
+  padding: 3px;
+}
+
+.szobakep:hover {
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  opacity: 1;
+}
+#szobagaleria img {
+  float: left;
+  max-width: 100%;
+  padding: 5px;
+  max-height: 90%;
+}
+
+#szobagaleria .szobaleiras {
+  padding: 5px;
+  text-align: center;
+}
+
+.pipa {
+  display: none;
+  border-color: green;
+  content: "\2713";
+}
+.rosszx {
+  display: none;
+  border-color: red;
+  content: "\0058";
 }

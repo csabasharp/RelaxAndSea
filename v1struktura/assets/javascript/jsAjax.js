@@ -1,4 +1,6 @@
 window.onload = function () {
+  //#region regisztracio
+
   var jelszoinput = document.getElementById("jelszo");
   var jelszominszoveg = document.getElementById("jelszominszoveg");
   var korDatuminput = document.getElementById("szuldat");
@@ -7,9 +9,12 @@ window.onload = function () {
   var telefonszamszoveg = document.getElementById("telefonszamszoveg");
   var emailinput = document.getElementById("email");
   var nevinput = document.getElementById("nev");
-
   var regurlap = document.getElementById("regurlap");
+  var foglalasgomb = document.getElementById("foglalasgomb");
 
+  function regmegjelenes() {
+    regurlap.style.visibility = "visible";
+  }
   function emailEllenorzes(emailinput) {
     if (emailinput.value.length >= 3 && emailinput.value.includes("@")) {
       return true;
@@ -85,4 +90,10 @@ window.onload = function () {
       event.preventDefault();
     }
   });
+
+  //#endregion
+
+  //#region foglalas
+
+  //#endregion
 };

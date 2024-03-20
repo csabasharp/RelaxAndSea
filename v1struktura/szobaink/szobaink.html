@@ -3,18 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Relax & Sea</title>
+    <title>Szobák-Relax & Sea</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" type="text/css" href="/assets/styling/style.css" />
+    <link rel="stylesheet" type="text/css" href="../assets/styling/style.css" />
     <link
       rel="stylesheet"
       type="text/css"
       href="../assets/styling/overwriteBootstrap.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/javascript/jsAjax.js" defer></script>
   </head>
 
   <body>
@@ -58,27 +64,27 @@
                 <a class="nav-link" href="wellness/wellness.html">Wellness</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Kapcsolat</a>
+                <a class="nav-link" href="contact.html">Elérhetőség</a>
               </li>
             </ul>
 
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="#reglogurlap" id="foglalasgomb">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  Foglalás
-                </a>
+                <a
+                  class="nav-link foglalasgomb"
+                  id="foglalasgomb"
+                  href="#regurlap"
+                  type="button"
+                  onclick="regmegjelenes()"
+                  >Foglalás</a
+                >
               </li>
               <li class="nav-item">
                 <div class="login-link">
                   <a
-                    class="nav-link active text-gradient"
-                    aria-current="page"
+                    class="nav-link text-gradient"
                     id="login"
-                    href="belepes/login.html"
+                    href="#loginurlap"
                     >Bejelentkezés</a
                   >
                 </div>
@@ -88,15 +94,118 @@
         </div>
       </nav>
     </header>
+    <div id="tartalom">
+      <div id="reszleg">
+        <div class="container">
+          <div id="szobak">
+            <h3>Szobáink</h3>
+            <h5>Szobáink a következőket tartalmazzák:</h5>
+            <ul>
+              <li>Okos TV</li>
+              <li>Kinyitható ablakok, amelyek a tengerre néznek</li>
+              <li>
+                Helyi útikalauz: térképpel, programokkal és
+                látványosságajánlókkal
+              </li>
+              <li>Fürdőhelyiség, zuhanyzófülkével és káddal</li>
+              <li>Nappalihelyiség</li>
+              <li>Franciaágy(ak) mely(ek)nek mérete: 180x200 cm</li>
+            </ul>
 
-    <div id="reglogurlap">
-      <form></form>
+            <h5>Elérhető szobaméretek:</h5>
+            <ul>
+              <li>3 ágyas - 50 m<sup>2</sup></li>
+              <li>2 ágyas - 35 m<sup>2</sup></li>
+              <li>1 ágyas - 28 m<sup>2</sup></li>
+            </ul>
+            <p></p>
+            <div id="szobagaleria">
+              <div class="row">
+                <div class="col">
+                  <div class="szobakep">
+                    <a
+                      target="_blank"
+                      href="../assets/images/section_images/guest_bedroom.jpg"
+                    >
+                      <img
+                        src="../assets/images/section_images/guest_bedroom.jpg"
+                        alt="Vendég hálószoba"
+                        title="Vendég hálószoba"
+                    /></a>
+                    <div class="szobaleiras">hálószoba</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="szobakep">
+                    <a
+                      target="_blank"
+                      href="../assets/images/section_images/guest_bathroom.jpg"
+                    >
+                      <img
+                        src="../assets/images/section_images/guest_bathroom.jpg"
+                        alt="Vendég fürdőszoba"
+                        title="Vendég fürdőszoba"
+                      />
+                    </a>
+                    <div class="szobaleiras">fürdőszoba</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="szobakep">
+                    <a
+                      target="_blank"
+                      href="../assets/images/section_images/guest_livingroom.jpg"
+                    >
+                      <img
+                        src="../assets/images/section_images/guest_livingroom.jpg"
+                        alt="Vendég nappali"
+                        title="Vendég nappali"
+                      />
+                    </a>
+                    <div class="szobaleiras">nappali</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <footer class="footer">
+      <div
+        id="kapcsolatfelvetel"
+        class="text-reset d-flex justify-content-center"
+      >
+        <ul class="list-group">
+          <li class="list-group-item d-flex align-items-center">
+            <i class="bi bi-envelope"></i> Email: relax.and.sea.hotel@gmail.com
+          </li>
+          <li class="list-group-item d-flex align-items-center">
+            <i class="bi bi-telephone"></i>
+            Telefonszám: 06 112345678
+          </li>
+          <li class="list-group-item d-flex align-items-center">
+            <i class="bi bi-geo-alt"></i> Cím: 1234, Budapest, Létező Tengerpart
+            utca 4.
+          </li>
+        </ul>
+      </div>
 
-    <footer class="card-footer">
-      Copyright © 2023-2024 - Hotel Relax & Sea - All Rights Reserved.
+      <div id="jog" class="text-reset">
+        Copyright © 2023-2024 - Hotel Relax & Sea - Minden jog fenntartva.
+        <p id="jogilinkek">
+          <a
+            href="https://www.fontfabric.com/fontfabric-commercial-eula-for-free-fonts/"
+            target="_blank"
+            >Fontfabric</a
+          >
+          <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank"
+            >Licensz</a
+          >
+          <a href="">Adatvédelem</a>
+        </p>
+      </div>
     </footer>
   </body>
 </html>
