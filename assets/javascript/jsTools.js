@@ -1,4 +1,9 @@
 class ApiGrabber{
+    constructor (api_key = "") {
+        this.#instanceId = Math.floor(Math.random() * 4294967296).toString(16);
+        this.#api_key = (typeof key == "string") ? key : "";
+    }
+
     #send = (method, table, id = undefined, params = "") => {
 
     var methods = new Array(
@@ -40,6 +45,8 @@ class ApiGrabber{
 
     }
     
+    #instanceId;
+
     #reqNum = 0;
 
     #lastResult = {};
@@ -48,10 +55,15 @@ class ApiGrabber{
     #api_key = "";
     setApiKey = (key) => {this.#api_key = (typeof key == "string") ? key : "";};
 
+    #msgGenerator = () => {
+        var no = ++this.#reqNum;
+        var msg = "Inst.: "+this.#instanceId+" Request No."+no+"\n";
+        return msg;
+    }
 
     create = async (table, params) => {
-        var no = ++this.#reqNum;
-        var msg = "Request No."+no+":\n";
+        var msg = this.#msgGenerator();
+
         if (typeof table !== "string") {
             console.error(msg+"Table was not a string");
             return Promise.reject(false);
@@ -70,8 +82,7 @@ class ApiGrabber{
         await $.when(this.#send("POST",table,undefined,data))
             .then(function(result) {
                 const reply = JSON.parse(result);
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " in " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nStatus => "+reply.code+";";
@@ -83,8 +94,7 @@ class ApiGrabber{
             }, function (reason){
                 const reply = JSON.parse(reason.responseText);
                 
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " in " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
@@ -106,8 +116,7 @@ class ApiGrabber{
     }
 
     read = async (table, id = undefined) => {
-        var no = ++this.#reqNum;
-        var msg = "Request No."+no+":\n";
+        var msg = this.#msgGenerator();
         if (typeof table !== "string") {
             console.error(msg+"Table was not a string");
             return Promise.reject(false);
@@ -124,8 +133,7 @@ class ApiGrabber{
         await $.when(this.#send("GET",table,id))
             .then(function(result) {
                 const reply = JSON.parse(result);
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " of " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nStatus => "+reply.code+";";
@@ -136,8 +144,7 @@ class ApiGrabber{
             }, function (reason){
                 const reply = JSON.parse(reason.responseText);
                 
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " of " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
@@ -157,8 +164,7 @@ class ApiGrabber{
     }
 
     update = async (table, id, params) => {
-        var no = ++this.#reqNum;
-        var msg = "Request No."+no+":\n";
+        var msg = this.#msgGenerator();
         if (typeof table !== "string") {
             console.error(msg+"Table was not a string");
             return Promise.reject(false);
@@ -177,8 +183,7 @@ class ApiGrabber{
         await $.when(this.#send("PUT",table,id,data))
             .then(function(result) {
                 const reply = JSON.parse(result);
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " in " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nStatus => "+reply.code+";";
@@ -190,8 +195,7 @@ class ApiGrabber{
             }, function (reason){
                 const reply = JSON.parse(reason.responseText);
                 
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " in " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
@@ -211,8 +215,7 @@ class ApiGrabber{
     }
 
     delete = async (table, id) => {
-        var no = ++this.#reqNum;
-        var msg = "Request No."+no+":\n";
+        var msg = this.#msgGenerator();
 
         if (typeof table !== "string") {
             console.error(msg+"Table was not a string");
@@ -231,8 +234,7 @@ class ApiGrabber{
         await $.when(this.#send("DELETE",table,id,data))
             .then(function(result) {
                 const reply = JSON.parse(result);
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " in " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nStatus => "+reply.code+";";
@@ -244,8 +246,7 @@ class ApiGrabber{
             }, function (reason){
                 const reply = JSON.parse(reason.responseText);
                 
-                msg = "Request No."+no+":"+
-                    "\n"+reply.action +
+                msg += reply.action +
                     " in " + reply.table +
                     ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
                     " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
