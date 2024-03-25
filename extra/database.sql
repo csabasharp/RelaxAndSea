@@ -26,8 +26,8 @@ CREATE TABLE foglalasok(
     userId smallint,
     felnott smallint DEFAULT 0, 
     fiatal smallint DEFAULT 0,
-    mettol datetime NOT NULL,
-    meddig datetime NOT NULL,
+    mettol date NOT NULL,
+    meddig date NOT NULL,
     FOREIGN KEY (szobaId) REFERENCES szobak(id),
     FOREIGN KEY (userId) REFERENCES userek(id)
 );

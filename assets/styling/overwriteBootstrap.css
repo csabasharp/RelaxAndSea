@@ -4,6 +4,10 @@
   max-height: 100px;
 }
 
+.form-group {
+  margin-bottom: 1rem !important;
+}
+
 .navbar a:hover {
   text-shadow: 1px 1px 1px #be6b41;
   color: var(--primary) !important;
@@ -56,19 +60,6 @@
   font-size: 95%;
 }
 
-.pipa {
-  /* megjelenéskor: display: inline-block; */
-  display: none;
-  border-color: green;
-  content: "\2713";
-}
-.rosszx {
-  /* megjelenéskor: display: inline-block; */
-  display: none;
-  border-color: red;
-  content: "\0058";
-}
-
 .validkeret {
   border-color: darkgreen !important;
   border-width: 2px !important;
@@ -80,7 +71,10 @@
 
 footer .list-group-item {
   background-color: inherit;
-  font-size: 65%;
+  font-size: 75%;
   color: beige;
 }
 
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #ffdccb37;
+}

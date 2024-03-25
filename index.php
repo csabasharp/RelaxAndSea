@@ -21,6 +21,10 @@ try {
       <?php if($_GET['page']==""){$sb->requirePart("login.php");} ?>
       <?php if($_GET['page']=="szobak"){print $rm->apiRead("szobak");} ?>
       <?php if($_GET['page']=="account" && isset($_SESSION)){print $sb->loadPage("account.html");}?>
+      <?php if($_GET['page']=="etterem" ){print $sb->loadPage("etterem.html");}?>
+      <?php if($_GET['page']=="rolunk" ){print $sb->loadPage("rolunk.html");}?>
+      <?php if($_GET['page']=="wellness" ){print $sb->loadPage("wellness.html");}?>
+      <?php if($_GET['page']=="szobak" ){print $sb->loadPage("szobaink.html");}?>
     </div>
 
     <?php

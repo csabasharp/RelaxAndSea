@@ -1,32 +1,50 @@
-<div class="popup">
-<form id="regurlap">
-    <div class="form-group">
-        <label for="nev">Név:</label><br>
-        <input class="form-control uszoveg" type="text" id="nev" name="nev" placeholder="Gipsz Jakab"><br>
+<div id="reszleg">
+    <div class="row">
+        <div class="fluid-container col-12 col-md-6">
+            <h2>Foglalások</h2>
+            <table class="table table-hover" id="foglalasok">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Mikor</th>
+                        <th scope="col">Szoba</th>
+                        <th scope="col">Felnőttek</th>
+                        <th scope="col">Fiatalok</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="fluid-container col-12 col-md-6">
+        <form id="details">
+            <div class="form-group">
+                <label for="nev">Név:</label><br>
+                <input class="form-control" type="text" id="nev" name="nev" placeholder="Gipsz Jakab"><br>
+            </div>
+            <div class="form-group">
+                <label for="szuldat">Születési dátum:</label><br>
+                <input class="form-control" type="date" id="szuldat" name="szuldat" value="2024-01-01"><br>
+            </div>
+            <div class="form-group">
+                <label for="telefon">Telefonszám:</label><br>
+                <input class="form-control" type="tel" id="telefon" name="telefon" value="" placeholder="06301234567"><br>
+            </div>
+            <div class="form-group">
+                <label for="lname">E-mail:</label><br>
+                <input class="form-control" type="email" id="email" name="email" value="" placeholder="example@email.com"><br>
+            </div>
+            <div class="form-group">
+                <label for="lname">Jelszó:</label><br>
+                <input class="form-control" type="password" id="jelszo" name="jelszo" placeholder="Adja meg a jelszavát frissítéshez!" required><br><br>
+            </div>
+            <input class="form-control" type="submit" value="Mentés" onclick="updateData(this)">
+        </form>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="szuldat">Születési dátum:</label><br>
-        <input class="form-control uszoveg" type="date" id="szuldat" name="szuldat" value="2024-01-01"><br>
-    </div>
-    <div class="form-group">
-        <label for="telefon">Telefonszám:</label><br>
-        <input class="form-control uszoveg" type="tel" id="telefon" name="telefon" value="" placeholder="06301234567"><br>
-    </div>
-    <div class="form-group">
-        <label for="lname">E-mail:</label><br>
-        <input class="form-control uszoveg" type="email" id="email" name="email" value="" placeholder="example@email.com"><br>
-    </div>
-    <div class="form-group">
-        <label for="lname">Jelszó:</label><br>
-        <input class="form-control uszoveg" type="password" id="jelszo" name="jelszo" placeholder="Adja meg a jelszavát frissítéshez!" required><br><br>
-    </div>
-    <input class="form-control uszoveg" type="submit" value="Mentés" onclick="updateData(this)">
-</form>
 <script>
     var user;
     $(document).ready(function () {
 
-        $("#regurlap").submit(function(e) {
+        $("#details").submit(function(e) {
             e.preventDefault();
         });
 
@@ -45,6 +63,37 @@
                 window.location = "http://relaxandsea/"
             }
         );
+
+
+        var foglalasok = [];
+        apiRequest.read("foglalasok").then(
+            function(reply){
+                reply.result.forEach(element => {
+                    if (element.userId == id) {
+                        foglalasok.push(element);
+                        var row = $("<tr />");
+                        var most = Date.now();
+                        var mettol = new Date(element.mettol);
+                        var meddig = new Date(element.meddig);
+                        
+                        row.addClass("text-warning");
+                        if (most >= mettol.getTime()) {
+                            row.removeClass("text-warning")
+                            row.addClass("text-success");
+                            if (most > meddig.getTime()) {
+                                row.removeClass("text-success");
+                                row.addClass("text-danger");
+                            }
+                        }
+                            row.append($("<td />").text(element.mettol.split(" ")[0]+" "+element.meddig.split(" ")[0]));
+                            row.append($("<td />").text(element.szobaId));
+                            row.append($("<td />").text(element.felnott));
+                            row.append($("<td />").text(element.fiatal));
+                        $("#foglalasok").find("tbody").append(row);
+                    }
+                });
+            }
+        )
     });
 
     function updateData(input){
