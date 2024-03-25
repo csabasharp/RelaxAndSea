@@ -1,0 +1,60 @@
+<div class="popup">
+<form id="regurlap">
+    <div class="form-group">
+        <label for="nev">Név:</label><br>
+        <input class="form-control uszoveg" type="text" id="nev" name="nev" placeholder="Gipsz Jakab"><br>
+    </div>
+    <div class="form-group">
+        <label for="szuldat">Születési dátum:</label><br>
+        <input class="form-control uszoveg" type="date" id="szuldat" name="szuldat" value="2024-01-01"><br>
+    </div>
+    <div class="form-group">
+        <label for="telefon">Telefonszám:</label><br>
+        <input class="form-control uszoveg" type="tel" id="telefon" name="telefon" value="" placeholder="06301234567"><br>
+    </div>
+    <div class="form-group">
+        <label for="lname">E-mail:</label><br>
+        <input class="form-control uszoveg" type="email" id="email" name="email" value="" placeholder="example@email.com"><br>
+    </div>
+    <div class="form-group">
+        <label for="lname">Jelszó:</label><br>
+        <input class="form-control uszoveg" type="password" id="jelszo" name="jelszo" placeholder="Adja meg a jelszavát frissítéshez!" required><br><br>
+    </div>
+    <input class="form-control uszoveg" type="submit" value="Mentés" onclick="updateData(this)">
+</form>
+<script>
+    var user;
+    $(document).ready(function () {
+
+        $("#regurlap").submit(function(e) {
+            e.preventDefault();
+        });
+
+        const apiRequest = new ApiGrabber(); //ide majd be kell szúrni az apikey-t!!!
+
+        var id = 1; //Ide be kell majd szúrni a felhasználó idjét! $_SESSION["id"]
+        apiRequest.read("userek",id).then(
+            function(reply){
+                user = reply.result.userek;
+                $("#nev").val(user.nev);
+                $("#szuldat").val(user.szuldat);
+                $("#telefon").val(user.telefon);
+                $("#email").val(user.email);
+            },
+            function(reply){
+                window.location = "http://relaxandsea/"
+            }
+        );
+    });
+
+    function updateData(input){
+        if (md5(user.jelszo) === md5($("#jelszo").val())) {
+            alert("Sikeres update!\n"+md5(user.jelszo));
+        }
+        else
+        {
+            alert("Sikertelen update... :(\n"+md5(user.jelszo))
+        }
+    }
+</script>
+</div>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src=""></script>
+</head>
+<body>
+        <label for="cars">Select method:</label>
+        <select  name="cars" id="cars" onchange="requestMaker(this)">
+            <option value="post">Create</option>
+            <option value="get">Read</option>
+            <option value="put">Update</option>
+            <option value="delete">Delete</option>
+        </select> 
+        <input type="text" id="table">
+
+        <div id="kiir"></div>
+
+    </form>
+    <div id="teszt"></div>
+    <script>
+        class ApiGrabber{
+            #send = (method, table, id = undefined, params = "") => {
+
+            var methods = new Array(
+                "GET", "POST", "PUT", "DELETE"
+            );
+
+            if (!methods.includes(method)) {
+                return false;
+            }
+
+            var requestUrl = null;
+            if (table != null) {
+                requestUrl = "http://relaxandsea/api/"+table;
+                
+                if (typeof id !== 'undefined') {
+                requestUrl += "/" + id;
+                }
+            }
+            else {return false;}
+
+            if (typeof params == "object") {
+                try {
+                    params = JSON.stringify(params);
+                } catch (error) {
+                    console.error("Request No."+this.#reqNum+" Failed\nReason: Params could not be converted to JSON format");
+                    return false;
+                }
+            }
+
+            return $.ajax({
+                url: requestUrl, 
+                method: method,
+                data: params,
+                dataType: "text",
+                success: function(result){
+                    return result;
+                }
+            });
+
+            }
+            
+            #reqNum = 0;
+
+            #lastResult = {};
+            getLastResult = () => {return this.#lastResult;};
+
+            #api_key = "";
+            setApiKey = (key) => {this.#api_key = (typeof key == "string") ? key : "";};
+
+
+            create = async (table, params) => {
+                var no = ++this.#reqNum;
+                var msg = "Request No."+no+":\n";
+                if (typeof table !== "string") {
+                    console.error(msg+"Table was not a string");
+                    return Promise.reject(false);
+                }
+                if(typeof params == "object" && params.constructor == Array) {
+                    var data = {
+                        api_key: this.#api_key,
+                        values: params
+                    }
+                }
+                else
+                    {console.error(msg+"Params was not an array."); return Promise.reject(false);}
+
+                var ret;
+                var success;
+                await $.when(this.#send("POST",table,undefined,data))
+                    .then(function(result) {
+                        const reply = JSON.parse(result);
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " in " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nStatus => "+reply.code+";";
+                            
+                            success = true;
+                            console.log(msg);
+                            ret = reply;
+
+                    }, function (reason){
+                        const reply = JSON.parse(reason.responseText);
+                        
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " in " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
+
+                            success = false;
+                            console.error(msg);
+                            ret = reply;
+                    });
+
+                this.#lastResult = ret;
+                if (success) {
+                    return Promise.resolve(ret);
+                }
+                else {
+                    return Promise.reject(ret);
+                }
+
+                
+            }
+
+            read = async (table, id = undefined) => {
+                var no = ++this.#reqNum;
+                var msg = "Request No."+no+":\n";
+                if (typeof table !== "string") {
+                    console.error(msg+"Table was not a string");
+                    return Promise.reject(false);
+                }
+                if (typeof id !== "number") {
+                    if (typeof id !== "undefined") {
+                        console.error(msg+"Id was not a number: "+(typeof id));
+                        return Promise.reject(false);
+                    }
+                }
+            
+                var ret;
+                var success;
+                await $.when(this.#send("GET",table,id))
+                    .then(function(result) {
+                        const reply = JSON.parse(result);
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " of " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nStatus => "+reply.code+";";
+
+                            success = true;
+                            console.log(msg);
+                            ret = reply;
+                    }, function (reason){
+                        const reply = JSON.parse(reason.responseText);
+                        
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " of " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
+
+                        success = false;
+                        console.error(msg);
+                        ret = reply;
+                    });
+                
+                this.#lastResult = ret;
+                if (success) {
+                    return Promise.resolve(ret);
+                }
+                else {
+                    return Promise.reject(ret);
+                }
+            }
+
+            update = async (table, id, params) => {
+                var no = ++this.#reqNum;
+                var msg = "Request No."+no+":\n";
+                if (typeof table !== "string") {
+                    console.error(msg+"Table was not a string");
+                    return Promise.reject(false);
+                }
+                if(typeof params === "object" && params.constructor === Object) {
+                    var data = {
+                        api_key: this.#api_key,
+                        values: params
+                    }
+                }
+                else
+                    {console.error("Params was not an object."); return Promise.reject(false);}
+
+                var ret;
+                var success;
+                await $.when(this.#send("PUT",table,id,data))
+                    .then(function(result) {
+                        const reply = JSON.parse(result);
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " in " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nStatus => "+reply.code+";";
+                        
+                        success = true;
+                        console.log(msg);
+                        ret = reply;
+
+                    }, function (reason){
+                        const reply = JSON.parse(reason.responseText);
+                        
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " in " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
+
+                        success = false;
+                        console.error(msg);
+                        ret = reply;
+                    });
+
+                this.#lastResult = ret;
+                if (success) {
+                    return Promise.resolve(ret);
+                }
+                else {
+                    return Promise.reject(ret);
+                }
+            }
+
+            delete = async (table, id) => {
+                var no = ++this.#reqNum;
+                var msg = "Request No."+no+":\n";
+
+                if (typeof table !== "string") {
+                    console.error(msg+"Table was not a string");
+                    return Promise.reject(false);;
+                }
+                if (typeof id !== "number") {
+                    console.error(msg+"Id was not a number");
+                    return Promise.reject(false);;
+                }
+                var data = {
+                        api_key: this.#api_key,
+                };
+
+                var ret;
+                var success;
+                await $.when(this.#send("DELETE",table,id,data))
+                    .then(function(result) {
+                        const reply = JSON.parse(result);
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " in " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nStatus => "+reply.code+";";
+                        
+                        success = true;
+                        console.log(msg);
+                        ret = reply;
+
+                    }, function (reason){
+                        const reply = JSON.parse(reason.responseText);
+                        
+                        msg = "Request No."+no+":"+
+                            "\n"+reply.action +
+                            " in " + reply.table +
+                            ((typeof id !== "undefined") ? " at " + reply.record : "" ) + 
+                            " => " + reply.status + ";\nReason => "+reply.reason+" "+reply.code+";";
+
+                        success = false;
+                        console.error(msg);
+                        ret = reply;
+                    });
+
+                this.#lastResult = ret;
+                if (success) {
+                    return Promise.resolve(ret);
+                }
+                else {
+                    return Promise.reject(ret);
+                }
+            }
+
+        }
+
+        $(document).ready(function(){
+            var teszt1 = [
+                    "Béla Miki",
+                    "2013-02-13",
+                    "06703142152",
+                    "mikda@gmil.com",
+                    "jelsz"
+                ];
+
+            var teszt2 = {
+                nev : "Miklós Béla"
+            };
+
+
+            //console.log(params["values"].constructor);
+
+                
+
+            //params = JSON.stringify(params);
+            var table = "userek";
+            var id = 10;
+            
+            const apiG = new ApiGrabber();
+            apiG.setApiKey("guest"); // be kell állítani api-kulcsot fügvénnyel
+
+            apiG.create(table,teszt1).then( //Elkészíti a megadott táblába az új rekordot
+                function (reply) //ha sikeres akkor:
+                {
+                    id = Number(reply.result.id); //vissza jött adatból kiszedi az új elem id-jét
+
+                    apiG.read(table,id).then( //csinál egy get requestet:
+
+                        function (result) { //ha sikeres akkor kiírja konzolba
+                            console.log(result);
+
+                            apiG.update(table,id,teszt2).then( //frissítjük a feltöltött adatot
+                                function(reply) { //ha sikeres
+                                    
+                                    console.log(reply); //kiírjuk a vissza jött reply-t
+
+                                    var param = { // paramétereket objektumba kell mindig megadni!
+                                        api_key: "guest"
+                                    };
+
+                                    apiG.delete(table,id,param).then( //törlést indítunk
+                                        function (reply){ //ha sikeres.
+                                            console.log("Sikeres törlés!");
+                                        }
+                                    )
+                                }
+                            )
+
+                        }, // <-- fontos ez a vessző
+
+                        function (result){ //ha sikertelen akkor errort dob konzolba
+                            console.error(result);
+                        }
+
+                    );
+
+                }, // <-- fontos!!
+
+                function (reply) //ha a create sikertelen volt
+                {
+                    console.error("Sikertelen volt az elkészítés!");
+                }
+
+            );
+            
+        });
+  
+        function requestMaker(selected) {
+            var apiG = new ApiGrabber();
+            var table = String($("#table").val());
+
+            switch (selected.value) {
+                case "post":
+                    apiG.create(table).then(function (value) {
+                        console.log(value);
+                    });
+                    break;
+                case "get":
+                    apiG.read(table).then(function (value) {
+                        console.log(value);
+                    });
+                    break;
+                case "put":
+                    apiG.update(table).then(function (value) {
+                        console.log(value);
+                    });
+                    break;
+                case "delete":
+                    apiG.delete(table).then(function (value) {
+                        console.log(value);
+                    });
+                    break;
+
+            }
+        }
+      </script>
+</body>
+</html>

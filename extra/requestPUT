@@ -1,0 +1,14 @@
+POST http://relaxandsea/api/userek HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+    "api_key": "guest",
+    "values" : [
+                    "Béla Miki",
+                    "2013-02-13",
+                    "06703142152",
+                    "mikda@gmil.com",
+                    "jelsz"
+                ]
+}

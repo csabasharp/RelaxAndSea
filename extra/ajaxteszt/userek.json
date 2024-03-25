@@ -1,0 +1,101 @@
+{
+    "code": 200,
+    "table": "userek",
+    "key_used": null,
+    "user_id": null,
+    "action": "read",
+    "status": "success",
+    "result": {
+      "userek": [
+        {
+          "id": 1,
+          "nev": "Amy Freeman",
+          "szuldat": "2001-09-11",
+          "telefon": "+36604201337",
+          "email": "gaben@valvesoftware.com",
+          "jelszo": "admin"
+        },
+        {
+          "id": 2,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 3,
+          "nev": "Pista",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 4,
+          "nev": "Pista",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 5,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 6,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 7,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 8,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 9,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 10,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        },
+        {
+          "id": 11,
+          "nev": "Laci",
+          "szuldat": "2023-02-22",
+          "telefon": "0630323232",
+          "email": "laci@lacimail.hu",
+          "jelszo": "lacimaci123"
+        }
+      ]
+    }
+  }
+  
