@@ -2,10 +2,7 @@
   padding: 0.01rem 1rem;
   font-weight: bold;
   max-height: 100px;
-}
-
-.form-group {
-  margin-bottom: 1rem !important;
+  flex-wrap:nowrap;
 }
 
 .navbar a:hover {
@@ -60,6 +57,19 @@
   font-size: 95%;
 }
 
+.pipa {
+  /* megjelenéskor: display: inline-block; */
+  display: none;
+  border-color: green;
+  content: "\2713";
+}
+.rosszx {
+  /* megjelenéskor: display: inline-block; */
+  display: none;
+  border-color: red;
+  content: "\0058";
+}
+
 .validkeret {
   border-color: darkgreen !important;
   border-width: 2px !important;
@@ -71,6 +81,10 @@
 
 footer .list-group-item {
   background-color: inherit;
-  font-size: 75%;
+  font-size: 65%;
   color: beige;
+}
+
+.container-fluid {
+  padding: 0;
 }

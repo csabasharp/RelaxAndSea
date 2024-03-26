@@ -18,6 +18,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
     />
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/javascript/jsAjax.js" defer></script>
@@ -25,33 +26,46 @@
 
   <body>
     <header id="roof">
-      <nav class="navbar navbar-expand-lg navbar-light">
+      <nav class="navbar navbar-expand-xl navbar-light">
         <div class="container-fluid">
           <div class="logo-container">
             <a class="navbar-brand relaxlogoszoveg" href="index.html">
-              <img src="assets/images/svgLogoSargaSB.svg" alt="Menulogo" />
+              <img src="assets/images/svgLogoSargaSB.svg" alt="Menulogo">
             </a>
           </div>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
+          <div class="row order-xl-last">
+            <ul class="col-auto list-unstyled mb-0 p-0 align-items-center">
+              <li>
+                <a class="nav-link foglalasgomb" href="#regurlap">Foglalás</a>
+              </li>
+            </ul>
+            <ul class="col-auto list-unstyled d-xl-flex d-none mb-0 p-0 align-items-center">
+              <li>
+                  <a class="nav-link text-gradient" id="login" href="#loginurlap">Bejelentkezés</a>
+              </li>
+            </ul>
+            <ul class="col-auto list-unstyled d-xl-none mb-0 p-0 align-items-center">
+              <li class="dropdown">
+                <button type="button" class="btn bi bi-list" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item text-gradient nav-link" id="login" href="#loginurlap">Bejelentkezés</a></li>
+                  <li><a class="dropdown-item nav-link" href="index.html">Kezdőlap</a></li>
+                  <li><a class="dropdown-item nav-link" href="szobaink/szobaink.html">Szobáink és árai</a></li>
+                  <li><a class="dropdown-item nav-link" href="etterem/etterem.html">Étterem</a></li>
+                  <li><a class="dropdown-item nav-link" href="rolunk/rolunk.html">Szállodánkról</a></li>
+                  <li><a class="dropdown-item nav-link" href="wellness/wellness.html">Wellness</a></li>
+                  <li><a class="dropdown-item nav-link" href="contact.html">Elérhetőség</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="navbar-collapse collapse" id="navbarNav">
+            <ul class="navbar-nav mx-xl-auto ms-auto">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html"
-                  >Kezdőlap</a
-                >
+                <a class="nav-link active" aria-current="page" href="index.html">Kezdőlap</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="szobaink/szobaink.html">Szobáink</a>
+                <a class="nav-link" href="szobaink/szobaink.html">Szobáink és árai</a>
               </li>
 
               <li class="nav-item">
@@ -67,179 +81,152 @@
                 <a class="nav-link" href="contact.html">Elérhetőség</a>
               </li>
             </ul>
-
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a
-                  class="nav-link foglalasgomb"
-                  id="foglalasgomb"
-                  href="#regurlap"
-                  type="button"
-                  onclick="regmegjelenes()"
-                  >Foglalás</a
-                >
-              </li>
-              <li class="nav-item">
-                <div class="login-link">
-                  <a
-                    class="nav-link text-gradient"
-                    id="login"
-                    href="#loginurlap"
-                    >Bejelentkezés</a
-                  >
-                </div>
-              </li>
-            </ul>
           </div>
+            
+          
         </div>
       </nav>
     </header>
     <div id="tartalom">
-      <div class="container urlapkozepen">
-        <form id="regurlap" action="./assets/php/account.php" method="post">
-          <p>
-            Hogy foglalhasson, foglalását nyomonkövethesse vagy módosítsa,
-            elősször egy új fiókot kell létrehoznia.
-          </p>
-          <p><b>Adatait nem osztjuk senkivel.</b></p>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="nev" class="col-form-label">Teljes név:</label>
-                <span></span>
-                <input
-                  required
-                  type="text"
-                  class="form-control uszoveg"
-                  id="nev"
-                  name="nev"
-                  placeholder="Gipsz Jakab"
-                />
-              </div>
-              <div class="form-group">
-                <label for="email" class="col-form-label">Email cím:</label>
-                <input
-                  required
-                  type="email"
-                  class="form-control uszoveg"
-                  id="email"
-                  name="email"
-                  aria-describedby="emailHelp"
-                  placeholder="gipszjakab@gmail.com"
-                />
-              </div>
-              <div class="form-group">
-                <label for="telefon" class="col-form-label">Telefonszám:</label>
-                <div class="input-group uszoveg">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">06</span>
-                  </div>
-                  <input
-                    type="tel"
-                    required
-                    class="form-control"
-                    id="telefon"
-                    name="telefon"
-                    placeholder="701234567"
-                    pattern="[0-9]{1,7}"
-                    maxlength="9"
-                    minlength="9"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="szuldat" class="col-form-label"
-                  >Születési dátum:</label
-                >
-                <span
-                  class="form-text text-muted alszoveg"
-                  id="szuldatminszoveg"
-                  >legalább 16 éves kell legyen a foglaláshoz</span
-                >
-                <input
-                  required
-                  type="date"
-                  class="form-control uszoveg"
-                  id="szuldat"
-                  name="szuldat"
-                />
-              </div>
-              <div class="form-group">
-                <label for="jelszo" class="col-form-label">Jelszó:</label>
-                <span class="form-text text-muted alszoveg" id="jelszominszoveg"
-                  >minimum 8, maximum 50 karakter</span
-                >
-                <input
-                  required
-                  type="password"
-                  class="form-control uszoveg"
-                  id="jelszo"
-                  placeholder="•••••••••••••"
-                  name="jelszo"
-                />
-              </div>
-
-              <div class="form-group">
-                <div class="form-check">
-                  <label
-                    class="form-check-label"
-                    for="adatelf"
-                    id="adatvedelemurlap"
-                  >
-                    Elfogadom az
-                    <a href="">adatvédelmi nyilatkozatot</a>.
-                  </label>
-                  <input
-                    required
-                    type="checkbox"
-                    class="form-check-input"
-                    id="adatelf"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                value="regist"
-                name="submit"
-                id="reggomb"
-                class="btn"
-              >
-                Regisztráció
-              </button>
-            </div>
-            <div class="col-md-6">
-              <img src="assets/images/regpic.jpg" alt="regurlapKep" />
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="container">
-      <form class="loginurlap">
+      <form id="regurlap" action="./assets/php/account.php" method="post">
+        <p>
+          Hogy foglalhasson, foglalását nyomonkövethesse vagy módosítsa,
+          elősször egy új fiókot kell létrehoznia.
+        </p>
+        <p><b>Adatait nem osztjuk senkivel.</b></p>
+        <img src="assets/images/regpic.jpg" alt="regurlapKep" />
         <div class="form-group">
-          <label for="email">E-mail cím:</label>
+          <label for="nev">Teljes név:</label>
+          <span></span>
+
           <input
+            required
+            type="text"
+            class="form-control uszoveg"
+            id="nev"
+            name="nev"
+            placeholder="Gipsz Jakab"
+          />
+        </div>
+        <div class="form-group">
+          <label for="email">Email cím:</label>
+          <span></span>
+          <input
+            required
             type="email"
             class="form-control uszoveg"
             id="email"
             name="email"
+            aria-describedby="emailHelp"
+            placeholder="gipszjakab@gmail.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="telefon">Telefonszám:</label>
+          <span class="form-text text-muted alszoveg" id="telefonszamszoveg">
+            7
+          </span>
+          <div style="display: flex">
+            <input
+              readonly
+              type="tel"
+              class="form-control"
+              id="prefix"
+              value="06"
+            />
+            <input
+              required
+              type="tel"
+              class="form-control uszoveg"
+              id="telefon"
+              name="telefon"
+              placeholder="701234567"
+              pattern="[0-9]{1,7}"
+              maxlength="9"
+              minlength="9"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="szuldat">Születési dátum:</label>
+          <span class="form-text text-muted alszoveg" id="szuldatminszoveg"
+            >legalább 16 éves kell legyen a foglaláshoz</span
+          >
+          <input
+            required
+            type="date"
+            class="form-control uszoveg"
+            id="szuldat"
+            name="szuldat"
           />
         </div>
         <div class="form-group">
           <label for="jelszo">Jelszó:</label>
+          <span class="form-text text-muted alszoveg" id="jelszominszoveg"
+            >minimum 8, maximum 50 karakter</span
+          >
           <input
+            required
             type="password"
             class="form-control uszoveg"
             id="jelszo"
+            placeholder="************"
             name="jelszo"
           />
         </div>
-        <button type="submit" name="submit" class="btn" id="bejgomb">
-          Bejelentkezés
+        <br />
+
+        <div class="form-check">
+          <input
+            required
+            type="checkbox"
+            class="form-check-input"
+            id="adatelf"
+          />
+          <b>
+            <label class="form-check-label" for="adatelf">
+              Elfogadom, az adatvédelmi nyilatkozatot.</label
+            >
+          </b>
+        </div>
+        <br />
+        <button
+          type="submit"
+          value="regist"
+          name="submit"
+          id="regist"
+          class="btn"
+        >
+          Regisztráció
         </button>
       </form>
+      <div class="container">
+        <form class="loginurlap">
+          <div class="form-group">
+            <label for="email">E-mail cím:</label>
+            <input
+              type="email"
+              class="form-control uszoveg"
+              id="email"
+              name="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="jelszo">Jelszó:</label>
+            <input
+              type="password"
+              class="form-control uszoveg"
+              id="jelszo"
+              name="jelszo"
+            />
+          </div>
+          <button type="submit" name="submit" class="btn" onsubmit="">
+            Bejelentkezés
+          </button>
+        </form>
+      </div>
     </div>
 
     <footer class="footer">
@@ -248,29 +235,31 @@
         class="text-reset d-flex justify-content-center"
       >
         <ul class="list-group">
-          <li class="list-group-item d-flex align-items-center">
+          <li class="list-group-item contactelem d-flex align-items-center">
             <i class="bi bi-envelope"></i> Email: relax.and.sea.hotel@gmail.com
           </li>
-          <li class="list-group-item d-flex align-items-center">
-            <i class="bi bi-telephone"></i>
+          <li class="list-group-item contactelem d-flex align-items-center">
+            <i class="bi bi-telephone align-items-center"></i>
             Telefonszám: 06 112345678
           </li>
-          <li class="list-group-item d-flex align-items-center">
-            <i class="bi bi-geo-alt"></i> Cím: 1234, Budapest, Létező Tengerpart
-            utca 4.
+          <li class="list-group-item contactelem d-flex align-items-center">
+            <i class="bi bi-geo-alt"></i> Cím: Budapest, Létező Tengerpart utca
+            4.
           </li>
         </ul>
       </div>
 
       <div id="jog" class="text-reset">
         Copyright © 2023-2024 - Hotel Relax & Sea - Minden jog fenntartva.
+
         <p id="jogilinkek">
           <a
             href="https://www.fontfabric.com/fontfabric-commercial-eula-for-free-fonts/"
             target="_blank"
             >Fontfabric</a
           >
-          <a href="https://www.gnu.org/licenses/gpl-3.0.html" target="_blank"
+          <a
+            href="https://gist.github.com/kn9ts/cbe95340d29fc1aaeaa5dd5c059d2e60"
             >Licensz</a
           >
           <a href="">Adatvédelem</a>
